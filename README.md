@@ -1,0 +1,141 @@
+This project was bootstrapped with [Vite.js](https://vitejs.dev).
+
+## ⚙️ Setup
+
+1. Install [Node.js](https://nodejs.org);
+    > Require [Node.js](https://nodejs.org) version >=16.0.0 <17.0.0
+2. Install the NPM dependencies by running `npm ci`;
+3. If you want to serve the application with base public path on your server, you should create `.env.production.local` and add the variable `VITE_BASE_PUBLIC_PATH="/foo"`.
+
+## 🤖 Commands
+
+-   Run the local dev server at `localhost:3000`:
+    ```
+    npm run dev
+    ```
+-   Build your production site to `./dist/`:
+    ```
+    npm run build
+    ```
+-   Preview your build locally, before deploying at `localhost:4173`:
+    ```
+    npm run preview
+    ```
+-   Run the test cases:
+    ```
+    npm run test
+    ```
+-   Run the test cases in the watch mode:
+    ```
+    npm run test:watch
+    ```
+-   Check your JavaScript/TypeScript for errors and warnings:
+    ```
+    npm run lint:eslint
+    ```
+-   Check your CSS for errors and warnings:
+    ```
+    npm run lint:stylelint
+    ```
+-   Check your code formatting:
+    ```
+    npm run lint:prettier
+    ```
+-   Fix your code formatting:
+    ```
+    npm run lint:prettier:fix
+    ```
+-   Check your code all together:
+    ```
+    npm run lint
+    ```
+-   Run the local dev server of storybook at `localhost:6006`:
+    ```bash
+    npm run sb
+    ```
+-   Build the storybook to `./storybook-static/`:
+    ```bash
+    npm run build-sb
+    ```
+-   Install husky:
+    ```bash
+    npm run prepare
+    ```
+
+## 🧶 Structure
+
+> To create components [create-phen-component](https://github.com/m-kolomoyets/create-phen-component) CLI can be used
+
+-   `src/ui` contains some shared components without business logic like buttons, inputs, selects, titles, texts etc. Each component should consist of that files:
+
+    -   `Component.tsx` - the component file itself;
+    -   `Component.stories.tsx` - the stories file of component;
+    -   `Component.module.css` - the styles of component file (optional);
+    -   `types.ts` - the types of component file (optional);
+    -   `hooks` - contains component hooks dir (optional). Should consist of:
+        -   `hook.ts` - the hook file itself;
+    -   `constants.ts` - the constants of component file (optional);
+    -   `utils` - the utils dir of component file (optional). Should consist of:
+        -   `util.ts` - the util file itself;
+        -   `util.test.ts` - the test file of util;
+        -   `common.ts` - the common file of utils (optional). It should not have tests;
+    -   `index.ts` - the entry file for component;
+
+-   `src/components` a less independent entity consisting of `src/ui` components. For example the card component, it can be used anywhere. It can have little business logic. Each component should consist of that files:
+    -   `Component.tsx` - the component file itself;
+    -   `Component.stories.tsx` - the stories file of component (optional);
+    -   `Component.module.css` - the styles of component file (optional);
+    -   `types.ts` - the types of component file (optional);
+    -   `hooks` - contains component hooks dir (optional). Should consist of:
+        -   `hook.ts` - the hook file itself;
+    -   `constants.ts` - the constants of component file (optional);
+    -   `schemas.ts` - the schemas of component file (optional);
+    -   `utils` - the utils dir of component file (optional). Should consist of:
+        -   `util.ts` - the util file itself;
+        -   `util.test.ts` - the test file of util;
+        -   `common.ts` - the common file of utils (optional). It should not have tests;
+    -   `store` - contains local store dir (optional). Should consist of:
+        -   `store.ts` - the store file itself;
+    -   `context` - the context dir of component file (optional). Should consist of:
+        -   `context.tsx` - the context file itself;
+    -   `index.ts` - the entry file for component;
+    -   `components` - the component dir of components (optional). Should consist of like `src/components` but without stories;
+-   `src/modules` contains some independent features, that features have own area of responsibility. We can use here connecting to store, fetch some data etc. For example we have the Comments module, it should consist of `src/components`, `src/ui` and own components. Each module should consist of that files:
+    -   `Component.tsx` - the component of module file itself;
+    -   `Component.module.css` - the styles of module (optional);
+    -   `types.ts` - the types of module (optional);
+    -   `hooks` - contains module hooks dir (optional). Should consist of:
+        -   `hook.ts` - the hook file itself;
+    -   `constants.ts` - the constants of module (optional);
+    -   `schemas.ts` - the schemas of module (optional);
+    -   `utils` - the utils dir of module (optional). Should consist of:
+        -   `util.ts` - the util file itself;
+        -   `util.test.ts` - the test file of util;
+        -   `common.ts` - the common file of utils (optional). It should not have tests;
+    -   `store` - contains local store dir (optional). Should consist of:
+        -   `store.ts` - the store file itself;
+    -   `context` - the context dir of module file (optional). Should consist of:
+        -   `context.tsx` - the context file itself;
+    -   `index.ts` - the entry file for module;
+    -   `components` - the component dir of module (optional). Should consist of like `src/components` but without stories;
+-   `src/pages` should consist of contains `src/modules` and just render them. Each page should consist of that files:
+    -   `Page.tsx` - the component of page file itself;
+    -   `router` - the router dir. Should consist of:
+        -   `index.tsx` - the main file for the router;
+-   `src/components/layout` contains some layouts. It should use like wrapper;
+-   `src/api` contains api dir. Should consist of:
+    -   `api.ts` - the api file itself;
+-   `src/store` contains global store dir. Should consist of:
+    -   `store.ts` - the store file itself;
+-   `src/hooks` contains global hooks dir. Should consist of:
+    -   `api` - contains api hooks dir;
+    -   `hook.ts` - the hook file itself;
+-   `src/utils` contains global utils dir. Should consist of:
+    -   `util.ts` - the util file itself;
+    -   `util.test.ts` - the test file of util;
+    -   `common.ts` - the common file of utils (optional). It should not have tests;
+-   `src/constants.ts` contains global constants;
+-   `schemas.ts` - contains globals schemas;
+-   `src/types.ts` contains global types;
+-   `src/styles` contains global style files;
+-   `src/main.tsx` and `src/App.tsx` are entry points of application;

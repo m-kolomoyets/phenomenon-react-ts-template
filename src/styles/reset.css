@@ -1,0 +1,49 @@
+* {
+    @apply m-0;
+}
+
+html,
+body,
+#root {
+    @apply h-full;
+}
+
+body {
+    @apply antialiased;
+}
+
+#root {
+    @apply isolate;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    @apply break-words hyphens-auto;
+}
+
+a {
+    @apply cursor-pointer;
+}
+
+body button,
+body [type="button"],
+body [type="reset"],
+body [type="submit"] {
+    @apply appearance-none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
