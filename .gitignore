@@ -6,11 +6,16 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+.eslintcache
+.stylelintcache
 
 node_modules
 dist
 dist-ssr
 *.local
+/tmp
+/storybook-static
+.fttemplates
 
 # Editor directories and files
 .vscode/*
