@@ -1,6 +1,6 @@
 [![Vite Version](https://img.shields.io/badge/Vite-4.3.9-<COLOR>.svg)]() [![Node Version](https://img.shields.io/badge/Node.js-^16.19.0-<COLOR>.svg)]() [![React Version](https://img.shields.io/badge/React.JS-^18.2.0-blue.svg)]() [![Tailwind Version](https://img.shields.io/badge/TailwindCSS-^3.2.2-blue.svg)]() [![Typescript Version](https://img.shields.io/badge/Typescript-^5.0.2-blue.svg)]()
 
-[![Commit-lint Version](https://img.shields.io/badge/Commit_lint-^17.6.5-blue.svg)]() [![Husky Version](https://img.shields.io/badge/Husky-^8.0.0-blue.svg)]() [![PostCSS Version](https://img.shields.io/badge/PostCSS-^8.4.24-blue.svg)]() [![ESLint Version](https://img.shields.io/badge/ESLint-^8.38.0-blue.svg)]() [![Prettier Version](https://img.shields.io/badge/Prettier-^2.8.8-blue.svg)]() [![Stylelint Version](https://img.shields.io/badge/Stylelint-^15.7.0-blue.svg)]() [![Vitest Version](https://img.shields.io/badge/Vitest-^0.32.0-blue.svg)]()
+[![Commit-lint Version](https://img.shields.io/badge/Commit_lint-^17.6.5-blue.svg)]() [![Husky Version](https://img.shields.io/badge/Husky-^8.0.0-blue.svg)]() [![PostCSS Version](https://img.shields.io/badge/PostCSS-^8.4.24-blue.svg)]() [![ESLint Version](https://img.shields.io/badge/ESLint-^8.38.0-blue.svg)]() [![Prettier Version](https://img.shields.io/badge/Prettier-^2.8.8-blue.svg)]() [![Stylelint Version](https://img.shields.io/badge/Stylelint-^15.7.0-blue.svg)]()
 
 This project was bootstrapped with [Vite.js](https://vitejs.dev).
 
@@ -9,11 +9,7 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 -   [React.js](https://reactjs.org) - UI library
 -   [Typescript](https://www.typescriptlang.org) - Static type checker
 -   [TailwindCSS](https://tailwindcss.com) - CSS framework
--   [Tanstack React Query](https://react-query.tanstack.com) - Data fetching
--   [Axios](https://axios-http.com) - HTTP client
 -   [React Router DOM](https://reactrouter.com) - Routing
--   [Vitest](https://vitest.dev/) - Testing
--   [Zustand](https://github.com/pmndrs/zustand) - Store management
 
 ## 🚀 Quick start
 
