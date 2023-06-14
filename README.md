@@ -4,7 +4,18 @@
 
 This project was bootstrapped with [Vite.js](https://vitejs.dev).
 
-## ⚙️ Setup
+## 📦 Stack
+
+-   [React.js](https://reactjs.org) - UI library
+-   [Typescript](https://www.typescriptlang.org) - Static type checker
+-   [TailwindCSS](https://tailwindcss.com) - CSS framework
+-   [Tanstack React Query](https://react-query.tanstack.com) - Data fetching
+-   [Axios](https://axios-http.com) - HTTP client
+-   [React Router DOM](https://reactrouter.com) - Routing
+-   [Vitest](https://vitest.dev/) - Testing
+-   [Zustand](https://github.com/pmndrs/zustand) - Store management
+
+## 🚀 Quick start
 
 1. Install [Node.js](https://nodejs.org);
     > Require [Node.js](https://nodejs.org) version >=16.19.0

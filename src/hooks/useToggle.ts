@@ -1,15 +1,18 @@
 import { useCallback, useState } from 'react';
 
-export const useToggle = (
-    defaultValue?: boolean
-): [boolean, () => void, React.Dispatch<React.SetStateAction<boolean>>] => {
+/**
+ * Hook used to toggle a value.
+ * @param defaultValue The default value to use.
+ * @returns A tuple with the value, a function to toggle the value and a function to set the value.
+ */
+export const useToggle = (defaultValue?: boolean) => {
     const [value, setValue] = useState(Boolean(defaultValue));
 
     const toggle = useCallback(() => {
-        setValue((x) => {
-            return !x;
+        setValue((prev) => {
+            return !prev;
         });
     }, []);
 
-    return [value, toggle, setValue];
+    return [value, toggle, setValue] as const;
 };

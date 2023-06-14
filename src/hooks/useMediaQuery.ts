@@ -1,5 +1,11 @@
 import { useState, useEffect } from 'react';
 
+/**
+ * Hook to use media queries inside Component JSX.
+ * @param query The media query to use.
+ * @param defaultValue The default value to use.
+ * @returns A boolean indicating if the media query matches.
+ */
 export const useMediaQuery = (query: string, defaultValue = false) => {
     const [matches, setMatches] = useState(defaultValue);
 

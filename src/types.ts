@@ -21,5 +21,8 @@ export type ObjectOfStringsType = {
 };
 
 export type RequestWithSignal<T> = T & {
+    /**
+        The signal to cancel the request.
+     */
     signal?: AbortSignal;
 };
