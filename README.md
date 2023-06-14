@@ -1,7 +1,3 @@
-[![Vite Version](https://img.shields.io/badge/Vite-4.3.9-<COLOR>.svg)]() [![Node Version](https://img.shields.io/badge/Node.js-^16.19.0-<COLOR>.svg)]() [![React Version](https://img.shields.io/badge/React.JS-^18.2.0-blue.svg)]() [![Tailwind Version](https://img.shields.io/badge/TailwindCSS-^3.2.2-blue.svg)]() [![Typescript Version](https://img.shields.io/badge/Typescript-^5.0.2-blue.svg)]()
-
-[![Commit-lint Version](https://img.shields.io/badge/Commit_lint-^17.6.5-blue.svg)]() [![Husky Version](https://img.shields.io/badge/Husky-^8.0.0-blue.svg)]() [![PostCSS Version](https://img.shields.io/badge/PostCSS-^8.4.24-blue.svg)]() [![ESLint Version](https://img.shields.io/badge/ESLint-^8.38.0-blue.svg)]() [![Prettier Version](https://img.shields.io/badge/Prettier-^2.8.8-blue.svg)]() [![Stylelint Version](https://img.shields.io/badge/Stylelint-^15.7.0-blue.svg)]()
-
 This project was bootstrapped with [Vite.js](https://vitejs.dev).
 
 ## 📦 Stack
@@ -9,12 +5,11 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 -   [React.js](https://reactjs.org) - UI library
 -   [Typescript](https://www.typescriptlang.org) - Static type checker
 -   [TailwindCSS](https://tailwindcss.com) - CSS framework
--   [React Router DOM](https://reactrouter.com) - Routing
 
 ## 🚀 Quick start
 
 1. Install [Node.js](https://nodejs.org);
-    > Require [Node.js](https://nodejs.org) version >=16.19.0
+    > Require [Node.js](https://nodejs.org) version >=16.0.0
 2. Install the NPM dependencies by running `npm ci`;
 3. If you want to serve the application with base public path on your server, you should create `.env.production.local` and add the variable `VITE_BASE_PUBLIC_PATH="/foo"`.
 
@@ -31,14 +26,6 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 -   Preview your build locally, before deploying at `localhost:4173`:
     ```
     npm run preview
-    ```
--   Run the test cases:
-    ```
-    npm run test
-    ```
--   Run the test cases in the watch mode:
-    ```
-    npm run test:watch
     ```
 -   Check your JavaScript/TypeScript for errors and warnings:
     ```
@@ -59,14 +46,6 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 -   Check your code all together:
     ```
     npm run lint
-    ```
--   Run the local dev server of storybook at `localhost:6006`:
-    ```bash
-    npm run sb
-    ```
--   Build the storybook to `./storybook-static/`:
-    ```bash
-    npm run build-sb
     ```
 -   Install husky:
     ```bash
