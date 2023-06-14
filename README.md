@@ -59,7 +59,6 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 -   `src/ui` contains some shared components without business logic like buttons, inputs, selects, titles, texts etc. Each component should consist of that files:
 
     -   `<component-name>.tsx` - the component file itself (change `component-name` to the actual name of the component);
-    -   `<component-name>.stories.tsx` - the stories file of component;
     -   `<component-name>.module.css` - the styles of component file (optional);
     -   `types.ts` - the types of component file (optional);
     -   `hooks` - contains component hooks (optional). Should include:
@@ -73,7 +72,6 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 
 -   `src/components` a less independent entity consisting of `src/ui` components. For example the card component, it can be used anywhere. It can have little business logic. Each component should consist of that files:
     -   `<component-name>.tsx` - the component file itself;
-    -   `<component-name>.stories.tsx` - the stories file of component (optional);
     -   `<component-name>.module.css` - the styles of component file (optional);
     -   `types.ts` - the types of component file (optional);
     -   `hooks` - contains component hooks (optional). Should include:
@@ -89,11 +87,10 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
     -   `context` - the context dir of component file (optional). Should consist of:
         -   `<context-name>.tsx` - the context file itself (change `scontext-nam` to the actual name of the context);
     -   `index.ts` - the entry file for component;
-    -   `components` - the component dir of components (optional). Should consist of like `src/components` but without stories;
+    -   `components` - the component dir of components (optional). Should consist of like `src/components`;
 -   `src/components/layout` contains some layouts. It should use like wrapper;
 -   `src/modules` contains some independent features, that features have own area of responsibility. We can use here connecting to store, fetch some data etc. For example we have the Comments module, it should consist of `src/components`, `src/ui` and own components. Each module should consist of that files:
     -   `<component-name>.tsx` - the component file itself;
-    -   `<component-name>.stories.tsx` - the stories file of component (optional);
     -   `<component-name>.module.css` - the styles of component file (optional);
     -   `types.ts` - the types of component file (optional);
     -   `hooks` - contains component hooks (optional). Should include:
@@ -109,7 +106,7 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
     -   `context` - the context dir of component file (optional). Should consist of:
         -   `<context-name>.tsx` - the context file itself (change `scontext-nam` to the actual name of the context);
     -   `index.ts` - the entry file for component;
-    -   `components` - the component dir of components (optional). Should consist of like `src/components` but without stories;
+    -   `components` - the component dir of components (optional). Should consist of like `src/components`;
 -   `src/pages` should consist of contains `src/modules` and just render them. Each page should consist of that files:
 
     -   `<page-name>.tsx` - the component of page file itself (change `page-name` to the actual name of the page) ;
