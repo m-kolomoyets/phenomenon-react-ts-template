@@ -26,3 +26,5 @@ export type RequestWithSignal<T> = T & {
      */
     signal?: AbortSignal;
 };
+
+export type SetStateValue<T> = React.Dispatch<React.SetStateAction<T>>;
