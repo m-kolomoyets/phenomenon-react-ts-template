@@ -20,11 +20,4 @@ export type ObjectOfStringsType = {
     [key: string]: string;
 };
 
-export type RequestWithSignal<T> = T & {
-    /**
-        The signal to cancel the request.
-     */
-    signal?: AbortSignal;
-};
-
 export type SetStateValue<T> = React.Dispatch<React.SetStateAction<T>>;

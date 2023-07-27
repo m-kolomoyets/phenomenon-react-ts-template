@@ -34,7 +34,6 @@
         ],
         "@typescript-eslint/no-empty-function": ["off"],
         "@typescript-eslint/no-non-null-assertion": ["off"],
-        "@typescript-eslint/no-duplicate-imports": ["error"],
         "react/react-in-jsx-scope": ["off"],
         "react/prop-types": ["off"],
         "react/no-unused-prop-types": ["error"],
