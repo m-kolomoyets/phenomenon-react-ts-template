@@ -16,8 +16,8 @@ const Router: React.FC = () => {
                 <Route path="/">
                     <Route index element={<HomePage />} />
                 </Route>
-                <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
-                <Route path={ROUTES.ANY} element={<Navigate to={ROUTES.NOT_FOUND} replace />} />
+                <Route path={ROUTES.notFound} element={<NotFoundPage />} />
+                <Route path="*" element={<Navigate to={ROUTES.notFound} replace />} />
             </Routes>
         </Suspense>
     );

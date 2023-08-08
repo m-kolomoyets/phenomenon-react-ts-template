@@ -14,7 +14,5 @@ export const DEFAULT_TRANSITION = { type: 'linear', duration: 0.15 };
  * Routing constants
  */
 export const ROUTES = {
-    ROOT: '/',
-    NOT_FOUND: '404',
-    ANY: '*',
+    notFound: '/404',
 } as const;
