@@ -1,5 +1,7 @@
-import react from '@vitejs/plugin-react';
+import { fileURLToPath } from 'node:url';
+import svgUse from '@svg-use/vite';
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
+import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig, loadEnv } from 'vite';
 import eslint from 'vite-plugin-eslint';
@@ -12,6 +14,7 @@ export default defineConfig(({ mode }) => {
         plugins: [
             react(),
             TanStackRouterVite(),
+            svgUse(),
             eslint({ exclude: ['/virtual:/', 'node_modules/**'] }),
             visualizer({
                 filename: './tmp/bundle-visualizer.html',
@@ -21,8 +24,22 @@ export default defineConfig(({ mode }) => {
         test: {
             environment: 'jsdom',
         },
+        build: {
+            assetsInlineLimit(filePath) {
+                return !filePath.endsWith('.svg');
+            },
+        },
         resolve: {
-            alias: [{ find: '@', replacement: '/src' }],
+            alias: [
+                {
+                    find: '@/icons',
+                    replacement: fileURLToPath(new URL('./src/icons', import.meta.url)),
+                },
+                {
+                    find: '@',
+                    replacement: '/src',
+                },
+            ],
         },
         server: {
             port: 3000,
