@@ -1,17 +1,22 @@
 @import url("./reset.css");
 
 :root {
+    /* Common Variables */
+    --color-white-100: hsla(0deg, 0%, 100%, 1);
+    --color-primary: hsla(25deg, 88%, 52%, 1);
+    --color-dark-900: hsla(180deg, 4%, 9%, 1);
+
     /* Focus Ring */
     --ring-width: 2px;
-    --ring-color: rgb(0, 126, 244);
-    --ring-offset-shadow: 0 0 0 0 #ffffff;
+    --ring-color: hsla(209deg, 100%, 47.8%, 1);
+    --ring-offset-shadow: 0 0 0 0 var(--color-white-100);
     --ring-shadow: 0 0 0 var(--ring-width) var(--ring-color);
 
     /* Scroll Bar */
     --scrollbar-size: 6px;
-    --scrollbar-track-color: rgb(223, 223, 223);
-    --scrollbar-thumb-color: rgb(175, 175, 175);
-    --scrollbar-thumb-color-hover: rgb(116 130 144);
+    --scrollbar-track-color: hsla(0deg, 0%, 87.5%, 1);
+    --scrollbar-thumb-color: hsla(0deg, 0%, 68.6%, 1);
+    --scrollbar-thumb-color-hover: hsla(210deg, 11.2%, 51%, 1);
 }
 
 .visually-hidden {
