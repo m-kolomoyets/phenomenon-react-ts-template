@@ -1,7 +1,7 @@
 {
     "name": "phenomenon-react-ts-template",
     "private": true,
-    "version": "0.0.0",
+    "version": "1.0.0",
     "type": "module",
     "engines": {
         "node": ">=16.0.0",
