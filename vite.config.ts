@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react';
+import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig, loadEnv } from 'vite';
 import eslint from 'vite-plugin-eslint';
@@ -10,6 +11,7 @@ export default defineConfig(({ mode }) => {
     return {
         plugins: [
             react(),
+            TanStackRouterVite(),
             eslint({ exclude: ['/virtual:/', 'node_modules/**'] }),
             visualizer({
                 filename: './tmp/bundle-visualizer.html',
