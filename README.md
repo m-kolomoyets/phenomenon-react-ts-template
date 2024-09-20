@@ -1,14 +1,5 @@
 This project was bootstrapped with [Vite.js](https://vitejs.dev).
 
-## Contents
-
-- [Contents](#contents)
-- [📦 Stack](#-stack)
-- [🚀 Quick start](#-quick-start)
-- [🤖 Commands](#-commands)
-- [🧶 Structure](#-structure)
-- [✳️ Icons Usage](#️-icons-usage)
-
 <details>
 <summary>📦 Stack</summary>
 
