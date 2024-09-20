@@ -17,7 +17,7 @@
         "lint:prettier": "prettier --check \"**/*.{js,ts,tsx,jsx,json,html,css,cjs}\"",
         "lint:prettier:fix": "prettier --write \"**/*.{js,ts,tsx,jsx,json,html,css,cjs}\"",
         "lint": "npm run lint:eslint && npm run lint:stylelint && npm run lint:prettier",
-        "prepare": "husky install"
+        "prepare": "husky"
     },
     "dependencies": {
         "@svg-use/react": "^0.4.2",
