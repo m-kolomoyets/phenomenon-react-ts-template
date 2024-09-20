@@ -1,19 +1,123 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 * {
-    @apply m-0;
+    margin: 0;
+}
+
+#root {
+    isolation: isolate;
 }
 
 html,
 body,
-#root {
-    @apply h-full;
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
 }
 
 body {
-    @apply antialiased;
-}
-
-#root {
-    @apply isolate;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }
 
 p,
@@ -23,18 +127,68 @@ h3,
 h4,
 h5,
 h6 {
-    @apply break-words hyphens-auto;
+    overflow-wrap: break-word;
 }
 
-a {
-    @apply cursor-pointer;
+ol,
+ul {
+    list-style: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+img {
+    height: auto;
+    vertical-align: middle;
+    font-style: italic;
+    background-repeat: no-repeat;
+    background-size: cover;
+    shape-margin: 0.75rem;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+    content: "";
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
 }
 
 body button,
 body [type="button"],
 body [type="reset"],
 body [type="submit"] {
-    @apply appearance-none;
+    appearance: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    outline: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

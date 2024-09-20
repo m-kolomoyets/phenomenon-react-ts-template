@@ -2,8 +2,8 @@
     "compilerOptions": {
         "composite": true,
         "module": "ES2020",
-        "moduleResolution": "Node",
+        "moduleResolution": "Bundler",
         "allowSyntheticDefaultImports": true
     },
-    "include": ["vite.config.ts"]
+    "include": ["src/**/*.{ts,tsx,js,jsx}", "vite.config.ts"]
 }
