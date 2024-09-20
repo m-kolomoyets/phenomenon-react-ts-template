@@ -3,3 +3,5 @@
 /dist
 /tmp
 /storybook-static
+
+routeTree.gen.ts
