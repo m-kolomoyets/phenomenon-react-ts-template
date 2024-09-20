@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
     return {
         plugins: [
             react(),
-            eslint({ exclude: ['**/virtual:/**', '**/node_modules/**'] }),
+            eslint({ exclude: ['/virtual:/', 'node_modules/**'] }),
             visualizer({
                 filename: './tmp/bundle-visualizer.html',
             }),
