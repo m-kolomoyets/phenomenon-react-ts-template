@@ -13,5 +13,28 @@
                 "singleQuote": false
             }
         }
-    ]
+    ],
+    "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+    "importOrder": [
+        "<BUILTIN_MODULES>",
+        "<THIRD_PARTY_MODULES>",
+        "<TYPES>",
+        "<TYPES>^[.]",
+        "^(@/context)(/.*)$",
+        "^[.](/context)(/.*)$",
+        "^(@/hooks)(/.*)$",
+        "^[.](/hooks)(/.*)$",
+        "@/constants",
+        "^[.]/constants",
+        "^(@/utils)(/.*)$",
+        "^[.](/utils)(/.*)$",
+        "^(@/components/layout)(/.*)$",
+        "^(@/components)(/.*)$",
+        "^[.](/components)(/.*)$",
+        "(./App)",
+        "^(@/icons)(/.*)$",
+        "^[.](/.*).css$"
+    ],
+    "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
+    "importOrderTypeScriptVersion": "5.0.0"
 }
