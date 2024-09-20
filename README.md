@@ -4,12 +4,18 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 
 -   [React.js](https://reactjs.org) - UI library
 -   [Typescript](https://www.typescriptlang.org) - Static type checker
--   [TailwindCSS](https://tailwindcss.com) - CSS framework
+-   [Vite](https://vitejs.dev/) - Bundler
+-   [Tanstack Router](https://tanstack.com/router/latest/docs/framework/react/overview) - Routing (file-based)
+-   [@svg-use](https://github.com/fpapado/svg-use) - icon management tool
+-   [Eslint](https://eslint.org/) - Code linter
+-   [Prettier](https://prettier.io/) - Code formatter
+-   [Husky](https://typicode.github.io/husky/) - commands execution handler on git events
+-   [CLSX](https://github.com/lukeed/clsx) - classNames management tool
 
 ## 🚀 Quick start
 
 1. Install [Node.js](https://nodejs.org);
-    > Require [Node.js](https://nodejs.org) version >=16.0.0
+    > Require [Node.js](https://nodejs.org) version >=18.0.0
 2. Install the NPM dependencies by running `npm ci`;
 3. If you want to serve the application with base public path on your server, you should create `.env.production.local` and add the variable `VITE_BASE_PUBLIC_PATH="/foo"`.
 
@@ -66,7 +72,6 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
     -   `constants.ts` - the constants of component file (optional);
     -   `utils` - the utils of component (optional). Should include:
         -   `<util-name>.ts` - the util file itself (change `util-name` to the actual name of util);
-        -   `<util-name>.test.ts` - the test file of util;
         -   `common.ts` - the common file of utils (optional). Can be used without tests;
     -   `index.ts` - the entry file for component;
 
@@ -80,7 +85,6 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
     -   `schemas.ts` - the schemas of component file (optional);
     -   `utils` - the utils of component (optional). Should include:
         -   `<util-name>.ts` - the util file itself (change `util-name` to the actual name of util);
-        -   `<util-name>.test.ts` - the test file of util;
         -   `common.ts` - the common file of utils (optional). Can be used without tests;
     -   `store` - contains local store dir (optional). Should consist of:
         -   `<store-name>.ts` - the store file itself (change `store-name` to the actual name of the store);
@@ -99,20 +103,26 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
     -   `schemas.ts` - the schemas of component file (optional);
     -   `utils` - the utils of component (optional). Should include:
         -   `<util-name>.ts` - the util file itself (change `util-name` to the actual name of util);
-        -   `<util-name>.test.ts` - the test file of util;
         -   `common.ts` - the common file of utils (optional). Can be used without tests;
     -   `store` - contains local store dir (optional). Should consist of:
         -   `<store-name>.ts` - the store file itself (change `store-name` to the actual name of the store);
     -   `context` - the context dir of component file (optional). Should consist of:
-        -   `<context-name>.tsx` - the context file itself (change `scontext-nam` to the actual name of the context);
+        -   `<context-name>.tsx` - the context file itself (change `context-name` to the actual name of the context);
     -   `index.ts` - the entry file for component;
     -   `components` - the component dir of components (optional). Should consist of like `src/components`;
--   `src/pages` should consist of contains `src/modules` and just render them. Each page should consist of that files:
-    -   `<page-name>.tsx` - the component of page file itself (change `page-name` to the actual name of the page) ;
-    -   `router` - the router dir. Should consist of:
-        -   `index.tsx` - the main file for the router;
 -   `src/api` contains api dir. Should consist of:
     -   `<api-name>.ts` - the api file itself (change the `api-name` to the actual api name);
+-   `src/routes` contains routing structure of the project.
+    -   `__root.tsx` - router configuration file. Contains the router component to include in the `main.tsx`
+    -   `index{.lazy}.tsx` - represents the content of the root page. To make it lazy-loaded, add `.lazy` after name
+    -   `<page-name>{.lazy}.tsx` - represents the content of the page with entered name. To make it lazy-loaded, add `.lazy` after name
+    -   `<page-name>` - folder can contain nested pages/layout
+        -   `index{.lazy}.tsx` - represents the content of the root page. To make it lazy-loaded, add `.lazy` after name
+        -   `<page-name>{.lazy}.tsx` - represents the content of the page with entered name. To make it lazy-loaded, add `.lazy` after name. Can be the folder too to contain other nested routes.
+        -   `$<parameter>{.lazy}.tsx` - represents page with defining the route parameter passed. E.g `/posts/$postId` -> `/posts/123`. Can be the folder too to contain other nested routes.
+    -   `_<layout-name>-layout.tsx` - layout component. Used to wrap content. Has to include `<Outlet />` for router to pass relevant page content. Has to include the filter `<layout-name>-layout` on the same level file was created
+    -   `_<layout-name>-layout` - folder will contain routes will be wrapped with this layout. Layouts can include nested layouts
+        -   `<page-name>{.lazy}.tsx` - route will be wrapped with the layout. To make it lazy-loaded, add `.lazy` after name. Can be the folder too to contain other nested routes.
 -   `src/store` contains global store dir. Should consist of:
     -   `<store-name>.ts` - the store file itself (change `store-name` to the actual name of the store);
 -   `src/hooks` contains global hooks dir. Should consist of:
@@ -126,4 +136,4 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 -   `schemas.ts` - contains globals schemas;
 -   `src/types.ts` contains global types;
 -   `src/styles` contains global style files;
--   `src/main.tsx` and `src/App.tsx` are entry points of application;
+-   `src/main.tsx` entry point of the application;
