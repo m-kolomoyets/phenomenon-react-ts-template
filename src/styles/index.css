@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap");
 @import url("./reset.css");
 
 :root {
@@ -5,10 +6,12 @@
     --color-white-100: hsla(0deg, 0%, 100%, 1);
     --color-primary: hsla(25deg, 88%, 52%, 1);
     --color-dark-900: hsla(180deg, 4%, 9%, 1);
+    --color-dark-700: hsla(226.7deg, 10.6%, 16.7%, 1);
+    --color-dark-600: hsla(225deg, 15%, 21%, 1);
 
     /* Focus Ring */
     --ring-width: 2px;
-    --ring-color: hsla(209deg, 100%, 47.8%, 1);
+    --ring-color: var(--color-primary);
     --ring-offset-shadow: 0 0 0 0 var(--color-white-100);
     --ring-shadow: 0 0 0 var(--ring-width) var(--ring-color);
 
@@ -17,6 +20,20 @@
     --scrollbar-track-color: hsla(0deg, 0%, 87.5%, 1);
     --scrollbar-thumb-color: hsla(0deg, 0%, 68.6%, 1);
     --scrollbar-thumb-color-hover: hsla(210deg, 11.2%, 51%, 1);
+
+    /* Companies colors */
+    --color-react: hsla(192.5deg, 95.1%, 68.2%, 1);
+    --color-typescript: hsla(211.4deg, 60.3%, 48.4%, 1);
+    --gradient-vite: linear-gradient(-45deg, hsla(280.7deg, 99%, 60%, 1) 0%, hsla(197.3deg, 100%, 63.9%, 1) 100%);
+    --gradient-tanstack-router: linear-gradient(
+        -45deg,
+        hsla(83.7deg, 80.5%, 44.3%, 1) 0%,
+        hsla(160.1deg, 84.1%, 39.4%, 1) 100%
+    );
+}
+
+body {
+    font-family: "Syne", sans-serif;
 }
 
 .visually-hidden {
@@ -29,6 +46,11 @@
     margin: -1px;
     padding: 0;
     border-width: 0;
+}
+
+.full-height {
+    min-height: 100vh;
+    min-height: 100svh;
 }
 
 body .focus-primary:focus-visible {
