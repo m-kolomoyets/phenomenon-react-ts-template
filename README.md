@@ -1,5 +1,8 @@
 This project was bootstrapped with [Vite.js](https://vitejs.dev).
 
+<details>
+<summary>📦 Stack</summary>
+
 ## 📦 Stack
 
 -   [React.js](https://reactjs.org) - UI library
@@ -11,13 +14,23 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 -   [Prettier](https://prettier.io/) - Code formatter
 -   [Husky](https://typicode.github.io/husky/) - commands execution handler on git events
 -   [CLSX](https://github.com/lukeed/clsx) - classNames management tool
+  
+</details>
 
-## 🚀 Quick start
+
+<details >
+<summary>🚀 Quick start</summary>
+
+##  🚀 Quick start
 
 1. Install [Node.js](https://nodejs.org);
     > Require [Node.js](https://nodejs.org) version >=18.0.0
 2. Install the NPM dependencies by running `npm ci`;
 3. If you want to serve the application with base public path on your server, you should create `.env.production.local` and add the variable `VITE_BASE_PUBLIC_PATH="/foo"`.
+</details>
+
+<details >
+<summary> 🤖 Commands</summary>
 
 ## 🤖 Commands
 
@@ -58,10 +71,16 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
     npm run prepare
     ```
 
+</details>
+
+<details>
+<summary> 🧶 Structure</summary>
+
 ## 🧶 Structure
 
 > To create components [create-phen-component](https://github.com/m-kolomoyets/create-phen-component) CLI can be used
-
+-   `src/icons`  contains all svg icons should be used
+    -   `<icon>.svg` - icon file itself
 -   `src/ui` contains some shared components without business logic like buttons, inputs, selects, titles, texts etc. Each component should consist of that files:
 
     -   `<component-name>.tsx` - the component file itself (change `component-name` to the actual name of the component);
@@ -137,3 +156,50 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 -   `src/types.ts` contains global types;
 -   `src/styles` contains global style files;
 -   `src/main.tsx` entry point of the application;
+</details>
+
+
+<details>
+<summary> ✳️ Icons Usage</summary>
+
+## ✳️ Icons Usage
+
+1. Collect all icons as separate files with `.svg` extension and kebab-case naming. 
+
+Example:
+```md
+src
+├── icons
+│   ├── arrow-left.svg
+│   ├── search.svg
+│   └── arrow-right-circle.svg
+```
+
+2. Import icon required as follows:
+```ts
+import { Component as ArrowLeftIcon } from '@/icons/arrow-left.svg?svgUse';
+```
+
+3. Use the icon as regular JSX component:
+```ts
+<ArrowLeftIcon className={s.icon} />
+```
+
+Type of the component and its props:
+Location: `Location: node_modules/@svg-use/react/dist/esm/ThemesExternalSvg.d.ts`
+
+```ts
+declare const createThemedExternalSvg: ({ url, id, viewBox }: FactoryProps) => (props: ThemeProps & SVGAttributes<SVGSVGElement>) => JSX.Element;
+
+export interface ThemeProps {
+	color?: string;
+	colorSecondary?: string;
+	colorTertiary?: string;
+}
+```
+
+Key moments:
+
+- 👉 Import Component names export, then name it as applicable icon naming is.
+- 👉 Autocomplete will support path to the svg file, ⚠️BUT⚠️ you should add ?svgUse param at the end of import statement for @svg-use to work
+</details
