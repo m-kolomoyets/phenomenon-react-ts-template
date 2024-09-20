@@ -1,46 +1,92 @@
 @import url("./reset.css");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+    /* Focus Ring */
+    --ring-width: 2px;
+    --ring-color: rgb(0, 126, 244);
+    --ring-offset-shadow: 0 0 0 0 #ffffff;
+    --ring-shadow: 0 0 0 var(--ring-width) var(--ring-color);
 
-@layer components {
-    body .focus-primary:focus-visible {
-        @apply outline-none ring-2 ring-blue-500;
-    }
-
-    body .focus-primary:focus {
-        @apply outline-none ring-2 ring-blue-500;
-    }
-
-    body .focus-within-primary:focus-within {
-        @apply outline-none ring-2 ring-blue-500;
-    }
-
-    body .focus-primary:focus:not(body .focus-primary:focus-visible) {
-        @apply ring-0;
-    }
-
-    body .focus-primary-child {
-        @apply ring-2 ring-blue-500;
-    }
+    /* Scroll Bar */
+    --scrollbar-size: 6px;
+    --scrollbar-track-color: rgb(223, 223, 223);
+    --scrollbar-thumb-color: rgb(175, 175, 175);
+    --scrollbar-thumb-color-hover: rgb(116 130 144);
 }
 
-/* Can change scrollbars colors if needed */
+.visually-hidden {
+    display: inline-block;
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border-width: 0;
+}
+
+body .focus-primary:focus-visible {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow:
+        var(--ring-offset-shadow),
+        var(--ring-shadow),
+        0 0 rgba(0, 0, 0, 0);
+}
+
+body .focus-primary:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow:
+        var(--ring-offset-shadow),
+        var(--ring-shadow),
+        0 0 rgba(0, 0, 0, 0);
+}
+
+body .focus-within-primary:focus-within {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow:
+        var(--ring-offset-shadow),
+        var(--ring-shadow),
+        0 0 rgba(0, 0, 0, 0);
+}
+
+body .focus-primary:focus:not(body .focus-primary:focus-visible) {
+    --ring-width: 0;
+
+    outline: none;
+    box-shadow: none;
+}
+
+body .focus-primary-child {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow:
+        var(--ring-offset-shadow),
+        var(--ring-shadow),
+        0 0 rgba(0, 0, 0, 0);
+}
+
 @media (hover: hover) and (pointer: fine) {
     *::-webkit-scrollbar {
-        @apply lg:w-3 lg:h-3;
+        width: var(--scrollbar-size);
+        height: var(--scrollbar-size);
     }
 
     *::-webkit-scrollbar-thumb:hover {
-        @apply lg:bg-slate-500;
+        background-color: var(--scrollbar-thumb-color-hover);
+        border-color: var(--scrollbar-thumb-color-hover);
     }
 
     *::-webkit-scrollbar-track {
-        @apply lg:bg-slate-100;
+        background-color: var(--scrollbar-track-color);
     }
 
     *::-webkit-scrollbar-thumb {
-        @apply lg:bg-slate-300 lg:rounded-sm lg:border-4 lg:border-slate-100;
+        background-color: var(--scrollbar-thumb-color);
+        border-radius: 6px;
+        border: 4px solid var(--scrollbar-thumb-color);
     }
 }
