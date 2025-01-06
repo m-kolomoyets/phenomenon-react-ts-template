@@ -78,86 +78,601 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 
 ## 🧶 Structure
 
-> To create components [create-phen-component](https://github.com/m-kolomoyets/create-phen-component) CLI can be used
--   `src/icons`  contains all svg icons should be used
-    -   `<icon>.svg` - icon file itself
--   `src/ui` contains some shared components without business logic like buttons, inputs, selects, titles, texts etc. Each component should consist of that files:
+### API requests
 
-    -   `<component-name>.tsx` - the component file itself (change `component-name` to the actual name of the component);
-    -   `<component-name>.module.css` - the styles of component file (optional);
-    -   `types.ts` - the types of component file (optional);
-    -   `hooks` - contains component hooks (optional). Should include:
-        -   `<hook-name>.ts` - the hook file itself (change `hook-name` to the actual name of the hook);
-    -   `constants.ts` - the constants of component file (optional);
-    -   `utils` - the utils of component (optional). Should include:
-        -   `<util-name>.ts` - the util file itself (change `util-name` to the actual name of util);
-        -   `common.ts` - the common file of utils (optional). Can be used without tests;
-    -   `index.ts` - the entry file for component;
+API requests are created globally in the root of the project to be used inside API hooks. API request are not directly called in project, only in hooks.
 
--   `src/components` a less independent entity consisting of `src/ui` components. For example the card component, it can be used anywhere. It can have little business logic. Each component should consist of that files:
-    -   `<component-name>.tsx` - the component file itself;
-    -   `<component-name>.module.css` - the styles of component file (optional);
-    -   `types.ts` - the types of component file (optional);
-    -   `hooks` - contains component hooks (optional). Should include:
-        -   `<hook-name>.ts` - the hook file itself (change `hook-name` to the actual name of the hook);
-    -   `constants.ts` - the constants of component file (optional);
-    -   `schemas.ts` - the schemas of component file (optional);
-    -   `utils` - the utils of component (optional). Should include:
-        -   `<util-name>.ts` - the util file itself (change `util-name` to the actual name of util);
-        -   `common.ts` - the common file of utils (optional). Can be used without tests;
-    -   `store` - contains local store dir (optional). Should consist of:
-        -   `<store-name>.ts` - the store file itself (change `store-name` to the actual name of the store);
-    -   `context` - the context dir of component file (optional). Should consist of:
-        -   `<context-name>.tsx` - the context file itself (change `scontext-nam` to the actual name of the context);
-    -   `index.ts` - the entry file for component;
-    -   `components` - the component dir of components (optional). Should consist of like `src/components`;
--   `src/components/layout` contains some layouts. It should use like wrapper;
--   `src/modules` contains some independent features, that features have own area of responsibility. We can use here connecting to store, fetch some data etc. For example we have the Comments module, it should consist of `src/components`, `src/ui` and own components. Each module should consist of that files:
-    -   `<component-name>.tsx` - the component file itself;
-    -   `<component-name>.module.css` - the styles of component file (optional);
-    -   `types.ts` - the types of component file (optional);
-    -   `hooks` - contains component hooks (optional). Should include:
-        -   `<hook-name>.ts` - the hook file itself (change `hook-name` to the actual name of the hook);
-    -   `constants.ts` - the constants of component file (optional);
-    -   `schemas.ts` - the schemas of component file (optional);
-    -   `utils` - the utils of component (optional). Should include:
-        -   `<util-name>.ts` - the util file itself (change `util-name` to the actual name of util);
-        -   `common.ts` - the common file of utils (optional). Can be used without tests;
-    -   `store` - contains local store dir (optional). Should consist of:
-        -   `<store-name>.ts` - the store file itself (change `store-name` to the actual name of the store);
-    -   `context` - the context dir of component file (optional). Should consist of:
-        -   `<context-name>.tsx` - the context file itself (change `context-name` to the actual name of the context);
-    -   `index.ts` - the entry file for component;
-    -   `components` - the component dir of components (optional). Should consist of like `src/components`;
--   `src/api` contains api dir. Should consist of:
-    -   `<api-name>.ts` - the api file itself (change the `api-name` to the actual api name);
--   `src/routes` contains routing structure of the project.
-    -   `__root.tsx` - router configuration file. Contains the router component to include in the `main.tsx`
-    -   `index{.lazy}.tsx` - represents the content of the root page. To make it lazy-loaded, add `.lazy` after name
-    -   `<page-name>{.lazy}.tsx` - represents the content of the page with entered name. To make it lazy-loaded, add `.lazy` after name
-    -   `<page-name>` - folder can contain nested pages/layout
-        -   `index{.lazy}.tsx` - represents the content of the root page. To make it lazy-loaded, add `.lazy` after name
-        -   `<page-name>{.lazy}.tsx` - represents the content of the page with entered name. To make it lazy-loaded, add `.lazy` after name. Can be the folder too to contain other nested routes.
-        -   `$<parameter>{.lazy}.tsx` - represents page with defining the route parameter passed. E.g `/posts/$postId` -> `/posts/123`. Can be the folder too to contain other nested routes.
-    -   `_<layout-name>-layout.tsx` - layout component. Used to wrap content. Has to include `<Outlet />` for router to pass relevant page content. Has to include the filter `<layout-name>-layout` on the same level file was created
-    -   `_<layout-name>-layout` - folder will contain routes will be wrapped with this layout. Layouts can include nested layouts
-        -   `<page-name>{.lazy}.tsx` - route will be wrapped with the layout. To make it lazy-loaded, add `.lazy` after name. Can be the folder too to contain other nested routes.
--   `src/store` contains global store dir. Should consist of:
-    -   `<store-name>.ts` - the store file itself (change `store-name` to the actual name of the store);
--   `src/hooks` contains global hooks dir. Should consist of:
-    -   `api` - contains api hooks dir;
-    -   `<hook-name>.ts` - the hook file itself (change `hook-name` to the actual name of the hook);
--   `src/utils` contains global utils dir. Should consist of:
-    -   `<util-name>.ts` - the util file itself (change `util-name` to the actual name of util);
-    -   `<util-name>.test.ts` - the test file of util;
-    -   `common.ts` - the common file of utils (optional). Can be used without tests;
--   `src/constants.ts` contains global constants;
--   `schemas.ts` - contains globals schemas;
--   `src/types.ts` contains global types;
--   `src/styles` contains global style files;
--   `src/main.tsx` entry point of the application;
-</details>
+API requests should be located inside `src/api` folder. 
 
+API requests are performed with some library like `ky`, `axios` etc. Based on the library, `src/api` folder should contain the appropriate file `ky.ts` or `axios.ts`. This file should contain all instances for all origins.
+
+Example:
+```ts
+// ky.ts
+
+export const http = ky.create(...);
+export const formsHttp = http.extend(...);
+```
+
+API requests should:
+- be separated to files based on request origin `<originName>Http` -> `<originName>.ts`
+  - Example: `formsHttp` -> `forms.ts`
+- contain the requests to only the origin it is named for:
+  ```ts
+  // src/api/forms.ts
+
+  // ✅ Allowed:
+  import { formsHttp } from './ky';
+
+
+  // ❌ Not allowed:
+  import { formsHttp, dashboardHttp } from './ky'
+  ```
+
+#### API queryClient options
+
+When Tanstack Query is used, queryClient entity is created once on project start, and is used within all the application. By setting it in global aoi folder, we will be able to use it wherever needed in the app.
+
+The query client configuration file should be located at `src/api/queryClient.ts` and include configuration as follows as bare minimum:
+```ts
+import { QueryClient } from '@tanstack/react-query';
+
+export const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false,
+            retry: 1,
+        },
+        mutations: {
+            retry: 1,
+        },
+    },
+});
+```
+
+This configuration should be passed to `<QueryClientProvider />` in `src/main.tsx` file.
+
+>NOTE: This configuration as allowed to be used wherever using `useQueryClient` hook is not allowed:
+>- routes loaders
+>- functions may include api logic (setting query data etc.)
+
+
+### Icons
+
+Icons should be located at `src/icons` folder.
+
+Every icon should:
+- Have lowercase name with kebab case formatting (example: `profile.svg` or `airplane-landing.svg`)
+  
+Prerequisites:
+- Compress exported SVG with [SVGOMG](https://jakearchibald.github.io/svgomg/) tool
+
+### Contexts
+
+Contexts are optional for the root of the project and components among all the project.
+
+No matter, where the contexts will appear, they should:
+- Have separate `contexts` folder inside the folder where the hooks will be used
+  - Global contexts will be used in all the project, should be located at `src/contexts` folder. NOTE: Any component is allowed to call such contexts.
+  - If context will be used inside single component exclusively, you should create `contexts` folder inside the component folder. Example: `src/components/ArticleCard/contexts`. NOTE: such contexts are not allowed to be used outside of the component scope where the hooks folder were created. If such case appears, then you should move the hook(s) into global hooks folder. The child components (`src/components/ArticleCard/components/*`) only are allowed to use the context inside
+
+Each context should:
+- Be created inside the `contexts` folder
+- Have pascal case name, ending with `<contextName>Context` (example: `AuthContext.tsx`)
+- NOTE: The context file name should match the context name inside the file
+
+``` ts
+// src/contexts/AuthContext.tsx
+
+const AuthContext = createContext(...);
+```
+
+### Stores
+
+Stores are optional for the root of the project. Current rules are applied for `zustand` stores
+
+Stores are allowed to use in all the project.
+
+Stores should:
+- Have separate root `src/stores` folder
+
+Each store should:
+- Have camel case name, ending with `<storeName>Store` (example: `authStore.tsx`)
+- NOTE: The store file name should match the store hook name name inside the file
+  - `<storeName>Store.ts` -> `use<StoreName>Store.ts`
+
+``` ts
+// src/stores/authStore.ts
+
+export const useAuthStore = create(...)
+```
+
+### Hooks
+
+Hooks are optional for the root of the project and components among all the project.
+
+No matter, where the hooks will appear, they should:
+- Have separate `hooks` folder inside the folder where the hooks will be used
+  - Global hooks will be used in all the project, should be located at `src/hooks` folder
+  - If hook will be used inside single component exclusively, you should create `hooks` folder inside the component folder. Example: `src/components/ArticleCard/hooks`. NOTE: such hooks are not allowed to be used outside of the component scope where the hooks folder were created. If such case appears, then you should move the hook(s) into global hooks folder
+
+Each hook should:
+- Be created inside the `hooks` folder
+- Have camel case name, starting with `use` (example: `useHavePermissions.ts`)
+- NOTE: The hook file name should match the hook name inside the file
+
+``` ts
+// src/hooks/useHavePermissions.ts 
+
+export const useHavePermissions = () => {...}
+```
+
+#### API hooks
+
+Because of using Tanstack query, and its hooks mechanic, following the TkDodo's recommendations, all API requests should be inside custom hooks that call `useQuery` and `useMutation` hooks. API requests were described in the relevant section above.
+
+API hooks should be located inside `src/hooks/api` folder. 
+
+API hooks should:
+- be named for the api file. `<apiFile>.ts` -> `use<ApiFile>Api.ts`
+  - Example: `forms.ts` -> `useFormsApi.ts`
+- contain all hooks for every function declared in the api requests file
+
+Single API hook should:
+- be named for the api request function. `<requestName>` -> `use<RequestName>`
+  - Example: `submitForm` -> `useSubmitForm`
+
+#### Query hooks
+
+Query hooks can have the parameters to be passed like pagination, search params etc. These parameters should be passed into hooks as arguments. Recommended to pass the arguments as list of arguments, not as the object.
+
+Example:
+```ts
+export const useGetBooks = (search: string) => {
+    return useQuery({
+        queryKey: ['books', search]
+        // ...
+    })
+}
+
+export const useGetBooksByAuthorName = (authorName: string, search: string) => {
+    return useQuery({
+        queryKey: ['books', authorName, search]
+        // ...
+    })
+}
+```
+
+##### Query Keys
+
+It is also recommended to manage query keys in appropriate way to use them inside project.
+
+First things first, you should create the constant that includes queryKeys:
+```ts
+// src/hooks/api/useBooksApi.ts
+
+export const FORMS_API_KEYS = {
+    getAllBooks() {
+        return {
+            queryKey: ['books']
+        }
+    },
+    getBooks(search: string) {
+        return {
+            queryKey: ['books', search]
+        }
+    }
+    // ...
+}
+```
+
+>NOTE: Query keys contacts are allowed to be used in all the project to make invalidations and prefetched possible on a lot of events occur by user activities.
+
+And apply this in:
+- Query hooks:
+  ```ts
+  export const useGetBooks = (search: string) => {
+    return useQuery({
+        ...FORMS_API_KEYS.getBooks(search)
+        // ...
+    })
+  }   
+  ```
+- Query options:
+  ```ts
+  export const getBooksQueryOptions = (search: string) => {
+    return queryOption({
+        ...FORMS_API_KEYS.getBooks(search)
+        // ...
+    });
+  }
+
+  export const useGetBooks = (search: string) => {
+    return getBooksQueryOptions(search);
+  }  
+  ```
+- Query invalidations:
+  ```ts
+  import { FORMS_API_KEYS } from '@/api/books';
+
+  queryClient.invalidateQueries({
+    queryKey: FORMS_API_KEYS.getAllBooks().queryKey
+  })
+  ```
+- Query prefetches:
+  ```ts
+  import { FORMS_API_KEYS } from '@/api/books';
+
+  queryClient.prefetchQuery({
+     queryKey: FORMS_API_KEYS.getAllBooks().queryKey
+  })
+
+  // or
+
+  queryClient.getQueryData({
+     queryKey: FORMS_API_KEYS.getAllBooks().queryKey
+  })
+  ```
+
+#### Mutation hooks
+
+Mutation hooks from `useMutation` return the callable function as result, so no need to pass the arguments into hook call. But everything can happen to pass initial arguments into hook body directly for query client logic or whatever.
+
+```ts
+// src/api/books.ts
+
+export const addBookToFavorites = (bookId: string) => {...}
+
+// src/hooks/api/useBooksApi.ts
+
+import { addBookToFavorites } from '@/api/books';
+
+export const useAddBookToFavorites = () => {
+    return useMutation({
+        mutationFn: addBookToFavorites
+        // ...
+    })
+}
+
+// somewhere
+import { useAddBookToFavorites } from '@/hooks/api/useBooksApi';
+
+// ...
+
+const { mutate: addBookToFavorites } = useAddBookToFavorites();
+
+// ...
+
+addBookToFavorites(bookId, {...})
+
+```
+
+### Utility functions
+
+Utility functions are optional for the root of the project and components among all the project.
+
+No matter, where the utils will appear, they should:
+- Have separate `utils` folder inside the folder where the utils will be used
+  - Global utils will be used in all the project, should be located at `src/utils` folder
+  - If util will be used inside single component exclusively, you should create `utils` folder inside the component folder. Example: `src/components/ArticleCard/utils`. NOTE: such utils are not allowed to be used outside of the component scope where the utils folder were created. If such case appears, then you should move the util(s) into global utils folder
+
+Each util should:
+- Be created inside the `utils` folder
+- Have camel case name (example: `getHasPermissions.ts`)
+- NOTE: The util file name should match the util name inside the file
+- (Optional): Unit tests can be written for the util
+  - `<utilName>.ts` -> `<utilName>.test.ts`
+  
+``` ts
+//getHasPermissions.ts
+
+export const getHasPermissions = () => {...}
+```
+
+>NOTE: There is also the another type of utils - sort of primitive which are 100% sure they return predictable result and no need in tests, so these utils should be located at `.../utils/common.ts`
+
+### Constants
+
+Constants are optional for the root of the project and components among all the project.
+
+There are 2 types of constants to use:
+- Regular constants (`constants.ts`)
+- Schemas constants (`schemas.ts`)
+
+The rules described below are applied for both of them.
+The only difference is:
+- `constants.ts` - for regular constants like time tokens, regexps etc.
+- `schemas.ts` - for `zod` schemas will be used in other schemas in all the project
+
+No matter, where the constants will appear, they should:
+- Have separate `constants.ts` file inside the folder where the constants will be created
+  - Global constants will be used in all the project, should be located at `src/constants.ts` file
+  - If constants will be used inside single component exclusively, you should create `utils` folder inside the component folder. Example: `src/components/ArticleCard/constants.ts`. 
+   >NOTE: such constants are not allowed to be used outside of the component scope where the constants file were created. If such case appears, then you should move the constants(s) into global constants file
+
+#### Schemas
+
+One more thing should be applied to schemas:
+- Each schema should have camel case name with ending `<schemaName>Schema`.
+```ts
+export const signUpSchema = ...
+```
+
+### Types
+
+Types are optional for the root of the project and components among all the project.
+
+The root project types should include:
+- Generic global types
+- Global primitive types for several components
+
+The components types should include:
+- Component props
+- Components props partitions
+
+### Styles
+
+Styles are optional for the root of the project and components among all the project.
+
+The global styles are located inside `src/styles` folder
+This folder should include:
+- `index.css` - root project styles (incl. imports of other root style files described below)
+- `reset.css` - predefined browsers styles reset file
+- `variables.css` - (optional) global variables file. This file can be created if there are a lot of variables to create and manage them easily. In case of ~25 variables they can still be maintained in `index.css`. 
+- `fonts.css` - (optional) global fonts to be implemented through `@font-face` directive.
+
+### Components
+Components should be located at:
+- `src/ui`
+  - basic primitive components (Example: buttons, typography, wrappers etc.)
+  - do not have complex logic (complex hooks, contexts)
+  - can NOT use `src/components` components inside
+- `src/components` 
+  - complex components use `src/ui` components inside as building blocks
+  - Can have any types of hooks, contexts inside
+
+
+#### Anatomy
+
+The component should:
+- Have separate folder
+- Have pascal case name (example: `Button` or `ArticleCard`)
+- Have default export of the component itself
+
+The component folder should contain:
+- `<ComponentName>.tsx` - the component JSX
+- `<ComponentName>.module.css` - the styles of component file (optional)
+- `index.ts` the entry point file for exporting required modules from component
+  
+```ts
+export * from './<ComponentName>';
+export { default } from './<ComponentName>';
+// ... if needed, may export types and/or constants
+```
+
+> NOTE: If component ha to haves hooks/utils/constants/contexts, take a look at relevant chapters above.
+
+### Modules
+
+Modules are core blocks are used for routing. Router entries render modules only. It is not allowed to pass the components from `src/components` or `src/ui`.
+
+Modules are located at `src/modules` folder.
+
+Modules represent pages we should display within router. Modules hierarchy may also represent the routes subrouting.
+
+Every module should:
+- be named for the route it represent:
+  - `http://localhost:3000/about` -> `src/modules/About`
+- have the same architecture as `src/components` or `src/ui` as described above
+- have no props
+- module name should match the module component name:
+  ```ts
+  // src/modules/About/About.tsx
+
+  export const About: React.FC = () => {...}
+  ```
+  
+Modules are allowed:
+- to use `src/components` and/or `src/ui` components inside
+- to have owb hooks
+- to have own constants/schemas/styles
+- to have own sub-components (`src/modules/About/components/...`)
+- to use its sub-modules inside if it is not a sub-route
+
+#### Submodules
+
+Submodules are the modules inside the some module (`src/modules/About/components/...`).
+
+Submodules may have everything regular modules can have and do, but they can be used in two ways:
+- as sub-component for the rot module
+  - but it is already not allowed to be used as sub-route
+- as sub-route:
+  - `src/modules/About/components/Settings` -> `http://localhost:3000/about/settings`
+
+### Routing
+
+Tanstack Router is used as main router utility with file-based routing functionality.
+
+Routes are located at `src/routes` folder.
+
+#### `__root.tsx` file
+
+Thi file is used to set up the initial router with global component and parameters.
+
+Root file may include:
+- Devtools
+- Global context providers
+- 404 page set up
+
+#### File-based routing
+
+All files and folders inside `src/routes` folder are represented as client routes by the file name:
+```
+src/routes/index.tsx -> http://localhost:3000/
+src/routes/about.tsx -> http://localhost:3000/about/
+src/routes/about/settings.tsx -> http://localhost:3000/about/settings
+``` 
+
+Folders cam include the subroutes and index route:
+```
+src/routes/about/index.tsx -> http://localhost:3000/about/
+src/routes/about/settings.tsx -> http://localhost:3000/about/settings
+``` 
+
+Routes can be lazy-loaded or not.
+
+Lazy-loaded routes can:
+- render the module dynamically when the route is called
+- include pending components
+- include error component
+- include 404 component
+
+Regular route can:
+- everything lazy-loaded routes can
+- validate search parameters
+- perform prefetches with loader
+- perform actions before loader executes
+
+>NOTE: regular routes have more memory load, so if no need in search parameters load or prefetch, plea use lazy routes.
+
+Route have different file naming convection inside `src/routes` folder:
+
+Routes should:
+- be named with kebab-case lowercase (`src/routes/<route-name>.tsx`)
+- If lazy - add `.lazy` before `.tsx` (`src/routes/<route-name>.lazy.tsx`)
+- have no props
+- have route module name matched to route name but pascal-case ending with `<ModuleName>Page`:
+  ```ts
+  // src/routes/about.tsx
+
+  import About from '@/modules/about';
+
+  const AboutPage = createLazyFileRoute('/about')({
+    component: About
+  }) 
+  ```
+
+#### Mixing route types
+
+There is possibility to have route mixing between lazy and regular.
+
+We are able to split the logic this way:
+- Regular route
+  - validate search parameters
+  - perform prefetches with loader
+  - perform actions before loader executes
+- Lazy route
+  - render the module dynamically when the route is called
+  
+In terms of code it looks this way:
+
+Folder structure:
+```
+src/
+└── routes/
+    └── about/
+        ├── index.tsx
+        └── index.lazy.tsx
+```
+
+```ts
+// index.lazy.tsx
+
+import About from '@/modules/about';
+
+const AboutPage = createLazyFileRoute('/about')({
+    component: About
+}) 
+
+// index.tsx
+import { noopReturnNull } from '@/utils/common';
+
+const AboutPage = createFileRoute('/about')({
+    component: noopReturnNull,
+    validateSearch(search) {...},
+    beforeLoad() {...}
+    loader({ search }) {...},
+}) 
+```
+
+#### Layouts
+
+Tanstack router allows to create layouts.
+
+Layouts should:
+- be named for layout semanticsm kebab-cae, starting with `_` and ending with `-layout`:
+  - Example: `src/routes/_protected-layout/`
+- have both folder and file (not lazy) named by this layout:
+  ```
+  src/
+    └── routes/
+        ├── _protected-layout/
+        │   └── index.lazy.tsx
+        └── _protected-layout.tsx
+  ```
+
+Layout component should be stored at `src/components/layouts` folder.
+
+Layout components should:
+- have same structure as `src/components` have
+- include `<Outlet />` a child of component
+- have no props
+
+```ts
+// src/components/layouts/ProtectedLayout/ProtectedLayout.tsx
+import { Outlet } from '@tanstack/react-router';
+
+const ProtectedLayout: React.FC = () => {
+    return (
+        <div>
+            // ...
+            <Outlet />
+        </div>
+    )
+}
+
+// src/routes/_protected-layout.tsx
+
+import ProtectedLayout from '@/components/layouts/ProtectedLayout';
+
+const ProtectedLayoutPage = createFileRoute('/_protected-layout')({
+    component: ProtectedLayout
+    // ...
+})
+```
+
+#### Route API hooks
+
+Routes have own hooks like `useSearch` and `useNavigate` or other that `getRouteApi` return ([docs](https://tanstack.com/router/v1/docs/framework/react/api/router/getRouteApiFunction)). For optimizing the router tree iterations and by following the maintainer recommendations we should have the `from` attribute predefined for each route we have the hooks calls at.
+
+it is recommended to create custom route hooks for each module as follows:
+
+```ts
+// src/modules/About/hooks/ueAboutRouteApi.ts
+
+import { getRouteApi } from '@tanstack/react-router';
+
+const aboutRouteApi = getRouteApi('/about');
+
+export const ueAboutRouteApi = () => {
+    const search = aboutRouteApi.useSearch();
+    const navigate =  aboutRouteApi.useNavigate();
+
+    return { search, navigate };
+}
+
+// src/modules/About/About.tsx
+
+const About: React.FC = () => {
+    const { search, navigate } = ueAboutRouteApi();
+
+    // ...
+}
+```
+
+If no search needed, you may just return the navigate. Route API logic allows us to get the route data directly by setting the entry point as route id, which is autocompleted in dev mode launched.
+
+This methodology can be applied to layouts a well.
 
 <details>
 <summary> ✳️ Icons Usage</summary>
