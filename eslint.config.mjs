@@ -39,13 +39,11 @@ export default [
             ecmaVersion: 5,
             sourceType: 'module',
         },
-
         settings: {
             react: {
                 version: 'detect',
             },
         },
-
         rules: {
             '@typescript-eslint/no-unused-vars': [
                 'error',
@@ -56,13 +54,11 @@ export default [
                     varsIgnorePattern: '^_',
                 },
             ],
-
             '@typescript-eslint/no-empty-function': ['off'],
             '@typescript-eslint/no-non-null-assertion': ['off'],
             'react/react-in-jsx-scope': ['off'],
             'react/prop-types': ['off'],
             'react/no-unused-prop-types': ['error'],
-
             'react/function-component-definition': [
                 2,
                 {
@@ -70,9 +66,7 @@ export default [
                     unnamedComponents: 'arrow-function',
                 },
             ],
-
             'react/jsx-no-useless-fragment': ['error'],
-
             'react/self-closing-comp': [
                 'error',
                 {
@@ -80,7 +74,6 @@ export default [
                     html: true,
                 },
             ],
-
             'arrow-body-style': ['error', 'always'],
             'no-nested-ternary': ['error'],
             eqeqeq: ['error', 'always'],
@@ -88,7 +81,6 @@ export default [
             'no-unneeded-ternary': ['error'],
             'require-await': ['error'],
             'no-tabs': ['error'],
-
             'max-len': [
                 'error',
                 {
@@ -99,14 +91,12 @@ export default [
                     ignoreTemplateLiterals: true,
                 },
             ],
-
             quotes: ['error', 'single'],
             semi: ['error', 'always'],
             'no-loop-func': ['error'],
             'comma-style': ['error', 'last'],
             'space-before-blocks': ['error', 'always'],
             'no-mixed-spaces-and-tabs': ['error'],
-
             'no-unused-vars': [
                 'error',
                 {
@@ -116,21 +106,17 @@ export default [
                     varsIgnorePattern: '^_',
                 },
             ],
-
             'no-extra-semi': ['error'],
             'no-console': ['warn'],
             'no-debugger': ['error'],
             'block-spacing': ['error', 'always'],
-
             'max-nested-callbacks': [
                 'error',
                 {
                     max: 7,
                 },
             ],
-
             'no-trailing-spaces': ['error'],
-
             'semi-spacing': [
                 'error',
                 {
@@ -138,7 +124,6 @@ export default [
                     after: true,
                 },
             ],
-
             'no-var': ['error'],
             'no-multi-spaces': ['error'],
             'no-control-regex': ['off'],
