@@ -111,7 +111,7 @@ API requests should:
 
 #### API queryClient options
 
-When Tanstack Query is used, queryClient entity is created once on project start, and is used within all the application. By setting it in global aoi folder, we will be able to use it wherever needed in the app.
+When Tanstack Query is used, queryClient entity is created once on project start, and is used within all the application. By setting it in global api folder, we will be able to use it wherever needed in the app.
 
 The query client configuration file should be located at `src/api/queryClient.ts` and include configuration as follows as bare minimum:
 ```ts
@@ -387,7 +387,7 @@ The only difference is:
 No matter, where the constants will appear, they should:
 - Have separate `constants.ts` file inside the folder where the constants will be created
   - Global constants will be used in all the project, should be located at `src/constants.ts` file
-  - If constants will be used inside single component exclusively, you should create `utils` folder inside the component folder. Example: `src/components/ArticleCard/constants.ts`. 
+  - If constants will be used inside single component exclusively, you should create `constants.ts` file inside the component folder. Example: `src/components/ArticleCard/constants.ts`. 
    >NOTE: such constants are not allowed to be used outside of the component scope where the constants file were created. If such case appears, then you should move the constants(s) into global constants file
 
 #### Schemas
