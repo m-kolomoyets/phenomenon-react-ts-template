@@ -3,7 +3,6 @@ import { configContext as SvgUseConfigContext } from '@svg-use/react';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import ReactDOM from 'react-dom/client';
 import type { Config } from '@svg-use/react';
-import { IS_DEV } from './constants';
 
 import { routeTree } from './routeTree.gen';
 
@@ -20,8 +19,7 @@ const config: Config = {
     rewritePath: (pathOrHref) => {
         return pathOrHref;
     },
-    // enable this for DEV only
-    runtimeChecksEnabled: IS_DEV,
+    runtimeChecksEnabled: import.meta.env.DEV,
 };
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

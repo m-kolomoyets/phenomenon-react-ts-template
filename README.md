@@ -26,7 +26,7 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 1. Install [Node.js](https://nodejs.org);
     > Require [Node.js](https://nodejs.org) version >=22.0.0
 2. Install the NPM dependencies by running `npm ci`;
-3. If you want to serve the application with base public path on your server, you should create `.env.production.local` and add the variable `VITE_BASE_PUBLIC_PATH="/foo"`.
+3. Create `.env.local` then add variables. You can look at the `.env.local.example` file;
 </details>
 
 <details >
