@@ -1,5 +1,4 @@
 /// <reference  types="@svg-use/vite/client"  />
-
 import { fileURLToPath } from 'node:url';
 import svgUse from '@svg-use/vite';
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';

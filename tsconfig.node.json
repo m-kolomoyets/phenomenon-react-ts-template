@@ -15,11 +15,11 @@
 
         /* Linting */
         "strict": true,
-        "allowJs": false,
+        "allowJs": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
         "noUncheckedSideEffectImports": true
     },
-    "include": ["vite.config.ts"]
+    "include": ["vite.config.ts", "eslint.config.js", "postcss.config.cjs", "commitlint.config.cjs"]
 }
