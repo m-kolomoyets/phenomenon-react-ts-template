@@ -1,17 +1,14 @@
 /// <reference  types="@svg-use/vite/client"  />
-
 import { fileURLToPath } from 'node:url';
 import svgUse from '@svg-use/vite';
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { defineConfig, loadEnv } from 'vite';
-import eslint from 'vite-plugin-eslint';
+import { defineConfig } from 'vite';
+import eslint from 'vite-plugin-eslint2';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
-    const env = loadEnv(mode, process.cwd(), '');
-
+export default defineConfig(() => {
     return {
         plugins: [
             react(),
@@ -22,11 +19,8 @@ export default defineConfig(({ mode }) => {
                 filename: './tmp/bundle-visualizer.html',
             }),
         ],
-        base: env.VITE_BASE_PUBLIC_PATH,
-        test: {
-            environment: 'jsdom',
-        },
         build: {
+            target: ['es2021', 'edge91', 'firefox90', 'chrome91', 'safari15', 'opera77'],
             assetsInlineLimit(filePath) {
                 return !filePath.endsWith('.svg');
             },

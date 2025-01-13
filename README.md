@@ -14,7 +14,7 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 -   [Prettier](https://prettier.io/) - Code formatter
 -   [Husky](https://typicode.github.io/husky/) - commands execution handler on git events
 -   [CLSX](https://github.com/lukeed/clsx) - classNames management tool
-  
+
 </details>
 
 
@@ -26,7 +26,7 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 1. Install [Node.js](https://nodejs.org);
     > Require [Node.js](https://nodejs.org) version >=22.0.0
 2. Install the NPM dependencies by running `npm ci`;
-3. If you want to serve the application with base public path on your server, you should create `.env.production.local` and add the variable `VITE_BASE_PUBLIC_PATH="/foo"`.
+3. Create `.env.local` then add variables. You can look at the `.env.local.example` file;
 </details>
 
 <details >
@@ -34,39 +34,47 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 
 ## 🤖 Commands
 
--   Run the local dev server at `localhost:3000`:
+-   Runs the local dev server at `localhost:3000`:
+    ```
+    npm run dev:vite
+    ```
+-   Runs `tsc` CLI in watch mode:
+    ```
+    npm run dev:tsc
+    ```
+-   Runs the local dev server and `tsc` together:
     ```
     npm run dev
     ```
--   Build your production site to `./dist/`:
+-   Builds your production site to `./dist/`:
     ```
     npm run build
     ```
--   Preview your build locally, before deploying at `localhost:4173`:
+-   Previews your build locally, before deploying at `localhost:4173`:
     ```
     npm run preview
     ```
--   Check your JavaScript/TypeScript for errors and warnings:
+-   Checks your JavaScript/TypeScript for errors and warnings:
     ```
     npm run lint:eslint
     ```
--   Check your CSS for errors and warnings:
+-   Checks your CSS for errors and warnings:
     ```
     npm run lint:stylelint
     ```
--   Check your code formatting:
+-   Checks your code formatting:
     ```
     npm run lint:prettier
     ```
--   Fix your code formatting:
+-   Fixes your code formatting:
     ```
     npm run lint:prettier:fix
     ```
--   Check your code all together:
+-   Checks your code all together:
     ```
     npm run lint
     ```
--   Install husky:
+-   Installs husky:
     ```bash
     npm run prepare
     ```
@@ -82,7 +90,7 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 
 API requests are created globally in the root of the project to be used inside API hooks. API request are not directly called in project, only in hooks.
 
-API requests should be located inside `src/api` folder. 
+API requests should be located inside `src/api` folder.
 
 API requests are performed with some library like `ky`, `axios` etc. Based on the library, `src/api` folder should contain the appropriate file `ky.ts` or `axios.ts`. This file should contain all instances for all origins.
 
@@ -143,7 +151,7 @@ Icons should be located at `src/icons` folder.
 
 Every icon should:
 - Have lowercase name with kebab case formatting (example: `profile.svg` or `airplane-landing.svg`)
-  
+
 Prerequisites:
 - Compress exported SVG with [SVGOMG](https://jakearchibald.github.io/svgomg/) tool
 
@@ -202,7 +210,7 @@ Each hook should:
 - NOTE: The hook file name should match the hook name inside the file
 
 ``` ts
-// src/hooks/useHavePermissions.ts 
+// src/hooks/useHavePermissions.ts
 
 export const useHavePermissions = () => {...}
 ```
@@ -211,7 +219,7 @@ export const useHavePermissions = () => {...}
 
 Because of using Tanstack query, and its hooks mechanic, following the TkDodo's recommendations, all API requests should be inside custom hooks that call `useQuery` and `useMutation` hooks. API requests were described in the relevant section above.
 
-API hooks should be located inside `src/hooks/api` folder. 
+API hooks should be located inside `src/hooks/api` folder.
 
 API hooks should:
 - be named for the api file. `<apiFile>.ts` -> `use<ApiFile>Api.ts`
@@ -276,7 +284,7 @@ And apply this in:
         ...FORMS_API_KEYS.getBooks(search)
         // ...
     })
-  }   
+  }
   ```
 - Query options:
   ```ts
@@ -289,7 +297,7 @@ And apply this in:
 
   export const useGetBooks = (search: string) => {
     return getBooksQueryOptions(search);
-  }  
+  }
   ```
 - Query invalidations:
   ```ts
@@ -362,7 +370,7 @@ Each util should:
 - NOTE: The util file name should match the util name inside the file
 - (Optional): Unit tests can be written for the util
   - `<utilName>.ts` -> `<utilName>.test.ts`
-  
+
 ``` ts
 //getHasPermissions.ts
 
@@ -387,7 +395,7 @@ The only difference is:
 No matter, where the constants will appear, they should:
 - Have separate `constants.ts` file inside the folder where the constants will be created
   - Global constants will be used in all the project, should be located at `src/constants.ts` file
-  - If constants will be used inside single component exclusively, you should create `constants.ts` file inside the component folder. Example: `src/components/ArticleCard/constants.ts`. 
+  - If constants will be used inside single component exclusively, you should create `constants.ts` file inside the component folder. Example: `src/components/ArticleCard/constants.ts`.
    >NOTE: such constants are not allowed to be used outside of the component scope where the constants file were created. If such case appears, then you should move the constants(s) into global constants file
 
 #### Schemas
@@ -418,7 +426,7 @@ The global styles are located inside `src/styles` folder
 This folder should include:
 - `index.css` - root project styles (incl. imports of other root style files described below)
 - `reset.css` - predefined browsers styles reset file
-- `variables.css` - (optional) global variables file. This file can be created if there are a lot of variables to create and manage them easily. In case of ~25 variables they can still be maintained in `index.css`. 
+- `variables.css` - (optional) global variables file. This file can be created if there are a lot of variables to create and manage them easily. In case of ~25 variables they can still be maintained in `index.css`.
 - `fonts.css` - (optional) global fonts to be implemented through `@font-face` directive.
 
 ### Components
@@ -427,7 +435,7 @@ Components should be located at:
   - basic primitive components (Example: buttons, typography, wrappers etc.)
   - do not have complex logic (complex hooks, contexts)
   - can NOT use `src/components` components inside
-- `src/components` 
+- `src/components`
   - complex components use `src/ui` components inside as building blocks
   - Can have any types of hooks, contexts inside
 
@@ -443,7 +451,7 @@ The component folder should contain:
 - `<ComponentName>.tsx` - the component JSX
 - `<ComponentName>.module.css` - the styles of component file (optional)
 - `index.ts` the entry point file for exporting required modules from component
-  
+
 ```ts
 export * from './<ComponentName>';
 export { default } from './<ComponentName>';
@@ -471,7 +479,7 @@ Every module should:
 
   export const About: React.FC = () => {...}
   ```
-  
+
 Modules are allowed:
 - to use `src/components` and/or `src/ui` components inside
 - to have owb hooks
@@ -511,13 +519,13 @@ All files and folders inside `src/routes` folder are represented as client route
 src/routes/index.tsx -> http://localhost:3000/
 src/routes/about.tsx -> http://localhost:3000/about/
 src/routes/about/settings.tsx -> http://localhost:3000/about/settings
-``` 
+```
 
 Folders cam include the subroutes and index route:
 ```
 src/routes/about/index.tsx -> http://localhost:3000/about/
 src/routes/about/settings.tsx -> http://localhost:3000/about/settings
-``` 
+```
 
 Routes can be lazy-loaded or not.
 
@@ -549,7 +557,7 @@ Routes should:
 
   const AboutPage = createLazyFileRoute('/about')({
     component: About
-  }) 
+  })
   ```
 
 #### Mixing route types
@@ -563,7 +571,7 @@ We are able to split the logic this way:
   - perform actions before loader executes
 - Lazy route
   - render the module dynamically when the route is called
-  
+
 In terms of code it looks this way:
 
 Folder structure:
@@ -582,7 +590,7 @@ import About from '@/modules/about';
 
 const AboutPage = createLazyFileRoute('/about')({
     component: About
-}) 
+})
 
 // index.tsx
 import { noopReturnNull } from '@/utils/common';
@@ -592,7 +600,7 @@ const AboutPage = createFileRoute('/about')({
     validateSearch(search) {...},
     beforeLoad() {...}
     loader({ search }) {...},
-}) 
+})
 ```
 
 #### Layouts
@@ -679,7 +687,7 @@ This methodology can be applied to layouts a well.
 
 ## ✳️ Icons Usage
 
-1. Collect all icons as separate files with `.svg` extension and kebab-case naming. 
+1. Collect all icons as separate files with `.svg` extension and kebab-case naming.
 
 Example:
 ```md
