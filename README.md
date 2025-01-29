@@ -215,62 +215,69 @@ Each hook should:
 export const useHavePermissions = () => {...}
 ```
 
-#### API hooks
+#### Services
+
+Services are optional for the root of the project and components among all the project.
+Services should contain all API requests and hooks.
+Services may include other scopes like authentication services, permissions etc.
+
+Services are allowed to use in all the project.
+
+Services should:
+- Have separate root `src/services` folder
+- Each service scope should have its own folder
+- Each service scope should have its own file
+  
+##### API Services
+
+API services are services that contain API requests functions to be used in API hooks.
+
+API services should:
+- Be located at `src/services/api` folder
+- Have camel case name, ending with `<serviceName>` (example: `forms.ts`)
+- Names of the service also should be matched to file name in API hooks service folder
+
+##### API hooks
 
 Because of using Tanstack query, and its hooks mechanic, following the TkDodo's recommendations, all API requests should be inside custom hooks that call `useQuery` and `useMutation` hooks. API requests were described in the relevant section above.
 
-API hooks should be located inside `src/hooks/api` folder.
+API hooks should be located inside `src/services/tanstack-query` folder.
 
 API hooks should:
-- be named for the api file. `<apiFile>.ts` -> `use<ApiFile>Api.ts`
-  - Example: `forms.ts` -> `useFormsApi.ts`
+- be named for the api file. `<api>.ts` -> `<api>.ts`
+  - Example: `src/services/api/forms.ts` -> `src/services/tanstack-query/forms.ts`
 - contain all hooks for every function declared in the api requests file
 
 Single API hook should:
 - be named for the api request function. `<requestName>` -> `use<RequestName>`
   - Example: `submitForm` -> `useSubmitForm`
 
-#### Query hooks
+###### Query keys
 
-Query hooks can have the parameters to be passed like pagination, search params etc. These parameters should be passed into hooks as arguments. Recommended to pass the arguments as list of arguments, not as the object.
+Query keys should be managed in the `src/services/tanstack-query/queryKeys.ts` file.
+
+This file should contain objects with fields contain queryKeys.
+Each field of this object should return constant array with query keys.
+
+Naming convention:
+- Each query keys scope should contain the `all` field with the base query key
+- For lists, you should create the `list` function that returns the query key for the list
+  - If lists have filters and other parameters, you should create the `listWith<ParametersName>` function that returns the query key for the list with the parameter
+- For single items, you should create the `item` function that returns the query key for the item
 
 Example:
 ```ts
-export const useGetBooks = (search: string) => {
-    return useQuery({
-        queryKey: ['books', search]
-        // ...
-    })
-}
-
-export const useGetBooksByAuthorName = (authorName: string, search: string) => {
-    return useQuery({
-        queryKey: ['books', authorName, search]
-        // ...
-    })
-}
-```
-
-##### Query Keys
-
-It is also recommended to manage query keys in appropriate way to use them inside project.
-
-First things first, you should create the constant that includes queryKeys:
-```ts
-// src/hooks/api/useBooksApi.ts
-
-export const FORMS_API_KEYS = {
-    getAllBooks() {
-        return {
-            queryKey: ['books']
-        }
+export const BOOKS_API_KEYS = {
+    all: ['books'] as const,
+    list() {
+        return [...BOOKS_API_KEYS.all, 'list'] as const
     },
-    getBooks(search: string) {
-        return {
-            queryKey: ['books', search]
-        }
-    }
-    // ...
+    listWithSearch(search: string) {
+        return [...BOOKS_API_KEYS.list(), 'with-search' search] as const
+    },
+    item(id: string) {
+        return [...BOOKS_API_KEYS.all, 'item', id] as const
+    },
 }
 ```
 
@@ -281,7 +288,7 @@ And apply this in:
   ```ts
   export const useGetBooks = (search: string) => {
     return useQuery({
-        ...FORMS_API_KEYS.getBooks(search)
+        ...BOOKS_API_KEYS.listWithSearch(search)
         // ...
     })
   }
@@ -290,7 +297,7 @@ And apply this in:
   ```ts
   export const getBooksQueryOptions = (search: string) => {
     return queryOption({
-        ...FORMS_API_KEYS.getBooks(search)
+        ...BOOKS_API_KEYS.listWithSearch(search)
         // ...
     });
   }
@@ -301,39 +308,60 @@ And apply this in:
   ```
 - Query invalidations:
   ```ts
-  import { FORMS_API_KEYS } from '@/api/books';
+  import { BOOKS_API_KEYS } from '@/services/tanstack-query/queryKeys';
 
   queryClient.invalidateQueries({
-    queryKey: FORMS_API_KEYS.getAllBooks().queryKey
+    queryKey: BOOKS_API_KEYS.all
   })
   ```
 - Query prefetches:
   ```ts
-  import { FORMS_API_KEYS } from '@/api/books';
+  import { BOOKS_API_KEYS } from '@/services/tanstack-query/queryKeys';
 
   queryClient.prefetchQuery({
-     queryKey: FORMS_API_KEYS.getAllBooks().queryKey
+     queryKey: BOOKS_API_KEYS.all
   })
 
   // or
 
   queryClient.getQueryData({
-     queryKey: FORMS_API_KEYS.getAllBooks().queryKey
+     queryKey: BOOKS_API_KEYS.all
   })
   ```
+
+##### Query hooks
+
+Query hooks can have the parameters to be passed like pagination, search params etc. These parameters should be passed into hooks as arguments. Recommended to pass the arguments as list of arguments, not as the object.
+
+Example:
+```ts
+export const useGetBooks = (search: string) => {
+    return useQuery({
+        queryKey: BOOKS_API_KEYS.listWithSearch(search)
+        // ...
+    })
+}
+
+export const useGetBooksByAuthorName = (authorName: string, search: string) => {
+    return useQuery({
+        queryKey: BOOKS_API_KEYS.listWithSearch(authorName, search)
+        // ...
+    })
+}
+```
 
 #### Mutation hooks
 
 Mutation hooks from `useMutation` return the callable function as result, so no need to pass the arguments into hook call. But everything can happen to pass initial arguments into hook body directly for query client logic or whatever.
 
 ```ts
-// src/api/books.ts
+// src/services/tanstack-query/books.ts
 
 export const addBookToFavorites = (bookId: string) => {...}
 
 // src/hooks/api/useBooksApi.ts
 
-import { addBookToFavorites } from '@/api/books';
+import { addBookToFavorites } from '@/services/api/books';
 
 export const useAddBookToFavorites = () => {
     return useMutation({
@@ -343,7 +371,7 @@ export const useAddBookToFavorites = () => {
 }
 
 // somewhere
-import { useAddBookToFavorites } from '@/hooks/api/useBooksApi';
+import { useAddBookToFavorites } from '@/services/tanstack-query/books';
 
 // ...
 
