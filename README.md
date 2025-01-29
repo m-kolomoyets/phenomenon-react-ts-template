@@ -90,9 +90,9 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 
 API requests are created globally in the root of the project to be used inside API hooks. API request are not directly called in project, only in hooks.
 
-API requests should be located inside `src/api` folder.
+API requests should be located inside `src/services/api` folder.
 
-API requests are performed with some library like `ky`, `axios` etc. Based on the library, `src/api` folder should contain the appropriate file `ky.ts` or `axios.ts`. This file should contain all instances for all origins.
+API requests are performed with some library like `ky`, `axios` etc. Based on the library, `src/services/api` folder should contain the appropriate file `ky.ts` or `axios.ts`. This file should contain all instances for all origins.
 
 Example:
 ```ts
@@ -107,7 +107,7 @@ API requests should:
   - Example: `formsHttp` -> `forms.ts`
 - contain the requests to only the origin it is named for:
   ```ts
-  // src/api/forms.ts
+  // src/services/api/forms.ts
 
   // ✅ Allowed:
   import { formsHttp } from './ky';
@@ -121,7 +121,7 @@ API requests should:
 
 When Tanstack Query is used, queryClient entity is created once on project start, and is used within all the application. By setting it in global api folder, we will be able to use it wherever needed in the app.
 
-The query client configuration file should be located at `src/api/queryClient.ts` and include configuration as follows as bare minimum:
+The query client configuration file should be located at `src/services/tanstack-query/queryClient.ts` and include configuration as follows as bare minimum:
 ```ts
 import { QueryClient } from '@tanstack/react-query';
 
@@ -355,11 +355,11 @@ export const useGetBooksByAuthorName = (authorName: string, search: string) => {
 Mutation hooks from `useMutation` return the callable function as result, so no need to pass the arguments into hook call. But everything can happen to pass initial arguments into hook body directly for query client logic or whatever.
 
 ```ts
-// src/services/tanstack-query/books.ts
+// src/services/api/books.ts
 
 export const addBookToFavorites = (bookId: string) => {...}
 
-// src/hooks/api/useBooksApi.ts
+// src/services/tanstack-query/books.ts
 
 import { addBookToFavorites } from '@/services/api/books';
 
