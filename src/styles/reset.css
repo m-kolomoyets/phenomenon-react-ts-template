@@ -8,116 +8,25 @@
     margin: 0;
 }
 
-#root {
-    isolation: isolate;
-}
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-    padding: 0;
-    border: 0;
-    font: inherit;
-    font-size: 100%;
-    vertical-align: baseline;
-}
-
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-    display: block;
-}
-
 body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
 }
 
 p,
@@ -130,18 +39,23 @@ h6 {
     overflow-wrap: break-word;
 }
 
+p {
+    text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
 ol,
 ul {
     list-style: none;
-}
-
-img,
-picture,
-video,
-canvas,
-svg {
-    display: block;
-    max-width: 100%;
+    padding: 0;
 }
 
 img {
@@ -171,24 +85,15 @@ table {
     border-spacing: 0;
 }
 
-input,
 button,
-textarea,
-select {
-    font: inherit;
-}
-
-body button,
-body [type="button"],
-body [type="reset"],
-body [type="submit"] {
+[type="button"],
+[type="reset"],
+[type="submit"] {
     appearance: none;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-    outline: none;
+#root {
+    isolation: isolate;
 }
 
 @media (prefers-reduced-motion: reduce) {
