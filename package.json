@@ -23,7 +23,7 @@
     },
     "dependencies": {
         "@svg-use/react": "^0.4.3",
-        "@tanstack/react-router": "^1.95.3",
+        "@tanstack/react-router": "^1.99.0",
         "clsx": "^2.1.1",
         "react": "^19.0.0",
         "react-dom": "^19.0.0"
