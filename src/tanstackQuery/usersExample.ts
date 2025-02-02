@@ -22,11 +22,11 @@ export const usersQueryKeys = {
     },
 };
 
-export const getUsersQueryOptions = (searchParams?: Record<string, unknown> | URLSearchParams) => {
+export const getUsersQueryOptions = (searchParams: Record<string, unknown> | URLSearchParams = {}) => {
     return queryOptions({
-        queryKey: searchParams ? usersQueryKeys.list(searchParams) : usersQueryKeys.allLists(),
-        queryFn() {
-            return getUsers({ params: searchParams });
+        queryKey: usersQueryKeys.list(searchParams),
+        queryFn({ signal }) {
+            return getUsers({ signal, params: searchParams });
         },
     });
 };

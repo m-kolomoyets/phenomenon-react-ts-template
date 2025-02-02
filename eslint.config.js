@@ -13,7 +13,7 @@ export default tseslint.config({
         eslint.configs.recommended,
         tseslint.configs.recommended,
         eslintPluginPrettierRecommended,
-        pluginTanstackQuery.configs.recommended,
+        pluginTanstackQuery.configs['flat/recommended'],
     ],
     plugins: { react, 'react-hooks': reactHooksPlugin, '@tanstack/query': pluginTanstackQuery },
     languageOptions: {
