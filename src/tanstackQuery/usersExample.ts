@@ -25,7 +25,9 @@ export const usersQueryKeys = {
 export const getUsersQueryOptions = (searchParams?: Record<string, unknown> | URLSearchParams) => {
     return queryOptions({
         queryKey: searchParams ? usersQueryKeys.list(searchParams) : usersQueryKeys.allLists(),
-        queryFn: getUsers,
+        queryFn() {
+            return getUsers({ params: searchParams });
+        },
     });
 };
 
