@@ -1,9 +1,10 @@
 import clsx from 'clsx';
+import type { HomeExampleProps } from './types';
 import Counter from './components/Counter';
 import { Component as PhenomenonMarkIcon } from '@/icons/phenomenon-mark.svg?svgUse';
 import s from './style.module.css';
 
-const Home: React.FC = () => {
+const Home: React.FC<HomeExampleProps> = () => {
     return (
         <main className={clsx(s.wrap, 'full-height')}>
             <div className={s.inner}>
