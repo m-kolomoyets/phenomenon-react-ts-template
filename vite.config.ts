@@ -17,6 +17,8 @@ export default defineConfig(() => {
             eslint({ exclude: ['/virtual:/', 'node_modules/**'] }),
             visualizer({
                 filename: './tmp/bundle-visualizer.html',
+                gzipSize: true,
+                brotliSize: true,
             }),
         ],
         build: {
