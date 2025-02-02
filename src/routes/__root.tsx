@@ -1,8 +1,8 @@
-import { lazy, Suspense } from 'react';
+import React from 'react';
 import { createRootRoute, Outlet } from '@tanstack/react-router';
 
 const TanStackRouterDevtools = import.meta.env.DEV
-    ? lazy(async () => {
+    ? React.lazy(async () => {
           const res = await import('@tanstack/router-devtools');
 
           return {
@@ -18,9 +18,9 @@ export const Route = createRootRoute({
         return (
             <>
                 <Outlet />
-                <Suspense>
+                <React.Suspense>
                     <TanStackRouterDevtools />
-                </Suspense>
+                </React.Suspense>
             </>
         );
     },
