@@ -1,25 +1,58 @@
+# React-TS Project template
+
+> by Phenomenon.Studio
+
 This project was bootstrapped with [Vite.js](https://vitejs.dev).
 
-<details>
-<summary>📦 Stack</summary>
+---
+Table of contents:
+- [React-TS Project template](#react-ts-project-template)
+  - [📦 Stack](#-stack)
+  - [🚀 Quick start](#-quick-start)
+  - [🤖 Commands](#-commands)
+  - [🧶 Structure](#-structure)
+    - [API requests](#api-requests)
+      - [API queryClient options](#api-queryclient-options)
+    - [Icons](#icons)
+    - [Contexts](#contexts)
+    - [Stores](#stores)
+    - [Hooks](#hooks)
+      - [API hooks](#api-hooks)
+      - [Query hooks](#query-hooks)
+        - [Query Keys](#query-keys)
+      - [Mutation hooks](#mutation-hooks)
+    - [Utility functions](#utility-functions)
+    - [Constants](#constants)
+      - [Schemas](#schemas)
+    - [Types](#types)
+    - [Styles](#styles)
+    - [Components](#components)
+      - [Anatomy](#anatomy)
+    - [Modules](#modules)
+      - [Submodules](#submodules)
+    - [Routing](#routing)
+      - [`__root.tsx` file](#__roottsx-file)
+      - [File-based routing](#file-based-routing)
+      - [Mixing route types](#mixing-route-types)
+      - [Layouts](#layouts)
+      - [Route API hooks](#route-api-hooks)
+  - [✳️ Icons Usage](#️-icons-usage)
+---
 
 ## 📦 Stack
-
 -   [React.js](https://reactjs.org) - UI library
 -   [Typescript](https://www.typescriptlang.org) - Static type checker
 -   [Vite](https://vitejs.dev/) - Bundler
--   [Tanstack Router](https://tanstack.com/router/latest/docs/framework/react/overview) - Routing (file-based)
 -   [Tanstack Query](https://tanstack.com/query/latest/docs/framework/react/overview) - Asynchronous state management
--   [@svg-use](https://github.com/fpapado/svg-use) - Icon management tool
+-   [Tanstack Router](https://tanstack.com/router/latest/docs/framework/react/overview) - Routing (file-based)
+-   [Axios](https://axios-http.com/docs/intro) - HTTP client
+-   [Zod](https://zod.dev/) - Schema validation
+-   [React Hook Form](https://react-hook-form.com/) - Form management
+-   [@svg-use](https://github.com/fpapado/svg-use) - icon management tool
 -   [Eslint](https://eslint.org/) - Code linter
 -   [Prettier](https://prettier.io/) - Code formatter
--   [Husky](https://typicode.github.io/husky/) - Commands execution handler on git events
+-   [Husky](https://typicode.github.io/husky/) - commands execution handler on git events
 
-</details>
-
-
-<details >
-<summary>🚀 Quick start</summary>
 
 ##  🚀 Quick start
 
@@ -27,10 +60,6 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
     > Require [Node.js](https://nodejs.org) version >=22.0.0
 2. Install the NPM dependencies by running `npm ci`;
 3. Create `.env.local` then add variables. You can look at the `.env.local.example` file;
-</details>
-
-<details >
-<summary> 🤖 Commands</summary>
 
 ## 🤖 Commands
 
@@ -66,23 +95,18 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
     ```
     npm run lint:prettier
     ```
--   Fixes your code formatting:
-    ```
-    npm run lint:prettier:fix
-    ```
 -   Checks your code all together:
     ```
     npm run lint
+    ```
+-   Fixes your code formatting:
+    ```
+    npm run fix:prettier
     ```
 -   Installs husky:
     ```bash
     npm run prepare
     ```
-
-</details>
-
-<details>
-<summary> 🧶 Structure</summary>
 
 ## 🧶 Structure
 
@@ -90,38 +114,27 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 
 API requests are created globally in the root of the project to be used inside API hooks. API request are not directly called in project, only in hooks.
 
-API requests should be located inside `src/services/api` folder.
+API requests should be located inside `src/api` folder.
 
-API requests are performed with some library like `ky`, `axios` etc. Based on the library, `src/services/api` folder should contain the appropriate file `ky.ts` or `axios.ts`. This file should contain all instances for all origins.
+API requests are performed with some library like `ky`, `axios` etc. Based on the library, `src/api` folder should contain the appropriate file `@ky.ts` or `@axios.ts`. This file should contain all instances for all origins.
 
 Example:
 ```ts
-// ky.ts
+// @axios.ts
 
-export const http = ky.create(...);
-export const formsHttp = http.extend(...);
+export const http = axios.create(...);
+export const httpPrivate = axios.create(...);
 ```
 
 API requests should:
-- be separated to files based on request origin `<originName>Http` -> `<originName>.ts`
-  - Example: `formsHttp` -> `forms.ts`
-- contain the requests to only the origin it is named for:
-  ```ts
-  // src/services/api/forms.ts
-
-  // ✅ Allowed:
-  import { formsHttp } from './ky';
-
-
-  // ❌ Not allowed:
-  import { formsHttp, dashboardHttp } from './ky'
-  ```
+- be separated to files based on its scope. 
+  - Example: users requests -> `users.ts`; forms requests -> `forms.ts`
 
 #### API queryClient options
 
 When Tanstack Query is used, queryClient entity is created once on project start, and is used within all the application. By setting it in global api folder, we will be able to use it wherever needed in the app.
 
-The query client configuration file should be located at `src/services/tanstack-query/queryClient.ts` and include configuration as follows as bare minimum:
+The query client configuration file should be located at `src/tanstackQuery/@queryClient.ts` and include configuration as follows as bare minimum:
 ```ts
 import { QueryClient } from '@tanstack/react-query';
 
@@ -215,69 +228,60 @@ Each hook should:
 export const useHavePermissions = () => {...}
 ```
 
-#### Services
-
-Services are optional for the root of the project and components among all the project.
-Services should contain all API requests and hooks.
-Services may include other scopes like authentication services, permissions etc.
-
-Services are allowed to use in all the project.
-
-Services should:
-- Have separate root `src/services` folder
-- Each service scope should have its own folder
-- Each service scope should have its own file
-
-##### API Services
-
-API services are services that contain API requests functions to be used in API hooks.
-
-API services should:
-- Be located at `src/services/api` folder
-- Have camel case name, ending with `<serviceName>` (example: `forms.ts`)
-- Names of the service also should be matched to file name in API hooks service folder
-
-##### API hooks
+#### API hooks
 
 Because of using Tanstack query, and its hooks mechanic, following the TkDodo's recommendations, all API requests should be inside custom hooks that call `useQuery` and `useMutation` hooks. API requests were described in the relevant section above.
 
-API hooks should be located inside `src/services/tanstack-query` folder.
+API hooks should be located inside `src/tanstackQuery` folder.
 
 API hooks should:
-- be named for the api file. `<api>.ts` -> `<api>.ts`
-  - Example: `src/services/api/forms.ts` -> `src/services/tanstack-query/forms.ts`
+- be named for the api file. `src/api/users.ts` -> `src/tanstackQuery/users.ts`
 - contain all hooks for every function declared in the api requests file
 
 Single API hook should:
 - be named for the api request function. `<requestName>` -> `use<RequestName>`
   - Example: `submitForm` -> `useSubmitForm`
 
-###### Query keys
+#### Query hooks
 
-Query keys should be managed in the `src/services/tanstack-query/queryKeys.ts` file.
+Query hooks can have the parameters to be passed like pagination, search params etc. These parameters should be passed into hooks as arguments. Recommended to pass the arguments as list of arguments, not as the object.
 
-This file should contain objects with fields contain queryKeys.
-Each field of this object should return constant array with query keys.
-
-Naming convention:
-- Each query keys scope should contain the `all` field with the base query key
-- For lists, you should create the `list` function that returns the query key for the list
-  - If lists have filters and other parameters, you should create the `listWith<ParametersName>` function that returns the query key for the list with the parameter
-- For single items, you should create the `item` function that returns the query key for the item
+Query keys should be defined as described in [`Query keys`](#query-keys) section.
 
 Example:
 ```ts
-export const BOOKS_API_KEYS = {
+export const useGetBooks = (search: string) => {
+    return useQuery({
+        queryKey: BOOKS_QUERY_KEYS.listWithParams({ search })
+        // ...
+    })
+}
+
+export const useGetBooksByAuthorName = (authorName: string, search: string) => {
+    return useQuery({
+        queryKey: BOOKS_QUERY_KEYS.itemByAuthor(authorName, { search })
+        // ...
+    })
+}
+```
+
+##### Query Keys
+
+It is also recommended to manage query keys in appropriate way to use them inside project.
+
+First things first, you should create the constant that includes queryKeys:
+```ts
+// src/tanstackQuery/books.ts
+
+export const BOOKS_QUERY_KEYS = {
     all: ['books'] as const,
     list() {
-        return [...BOOKS_API_KEYS.all, 'list'] as const
+        return [...BOOKS_QUERY_KEYS.all, 'list'] as const
     },
-    listWithSearch(search: string) {
-        return [...BOOKS_API_KEYS.list(), 'with-search' search] as const
-    },
-    item(id: string) {
-        return [...BOOKS_API_KEYS.all, 'item', id] as const
-    },
+    listWithParams(params: { search: string }) {
+        return [...BOOKS_QUERY_KEYS.list(), params] as const
+    }
+    // ...
 }
 ```
 
@@ -288,7 +292,7 @@ And apply this in:
   ```ts
   export const useGetBooks = (search: string) => {
     return useQuery({
-        ...BOOKS_API_KEYS.listWithSearch(search)
+        queryKey: BOOKS_QUERY_KEYS.listWithParams({ search })
         // ...
     })
   }
@@ -297,7 +301,7 @@ And apply this in:
   ```ts
   export const getBooksQueryOptions = (search: string) => {
     return queryOption({
-        ...BOOKS_API_KEYS.listWithSearch(search)
+        queryKey: BOOKS_QUERY_KEYS.listWithParams({ search })
         // ...
     });
   }
@@ -308,60 +312,39 @@ And apply this in:
   ```
 - Query invalidations:
   ```ts
-  import { BOOKS_API_KEYS } from '@/services/tanstack-query/queryKeys';
+  import { BOOKS_QUERY_KEYS } from '@/tanstackQuery/books';
 
   queryClient.invalidateQueries({
-    queryKey: BOOKS_API_KEYS.all
+    queryKey: BOOKS_QUERY_KEYS.list()
   })
   ```
 - Query prefetches:
   ```ts
-  import { BOOKS_API_KEYS } from '@/services/tanstack-query/queryKeys';
+  import { BOOKS_QUERY_KEYS } from '@/tanstackQuery/books';
 
   queryClient.prefetchQuery({
-     queryKey: BOOKS_API_KEYS.all
+     queryKey: BOOKS_QUERY_KEYS.list()
   })
 
   // or
 
   queryClient.getQueryData({
-     queryKey: BOOKS_API_KEYS.all
+     queryKey: BOOKS_QUERY_KEYS.list()
   })
   ```
-
-##### Query hooks
-
-Query hooks can have the parameters to be passed like pagination, search params etc. These parameters should be passed into hooks as arguments. Recommended to pass the arguments as list of arguments, not as the object.
-
-Example:
-```ts
-export const useGetBooks = (search: string) => {
-    return useQuery({
-        queryKey: BOOKS_API_KEYS.listWithSearch(search)
-        // ...
-    })
-}
-
-export const useGetBooksByAuthorName = (authorName: string, search: string) => {
-    return useQuery({
-        queryKey: BOOKS_API_KEYS.listWithSearch(authorName, search)
-        // ...
-    })
-}
-```
 
 #### Mutation hooks
 
 Mutation hooks from `useMutation` return the callable function as result, so no need to pass the arguments into hook call. But everything can happen to pass initial arguments into hook body directly for query client logic or whatever.
 
 ```ts
-// src/services/api/books.ts
+// src/tanstackQuery/books.ts
 
 export const addBookToFavorites = (bookId: string) => {...}
 
-// src/services/tanstack-query/books.ts
+// src/tanstackQuery/books.ts
 
-import { addBookToFavorites } from '@/services/api/books';
+import { addBookToFavorites } from '@/tanstackQuery/books';
 
 export const useAddBookToFavorites = () => {
     return useMutation({
@@ -371,7 +354,7 @@ export const useAddBookToFavorites = () => {
 }
 
 // somewhere
-import { useAddBookToFavorites } from '@/services/tanstack-query/books';
+import { useAddBookToFavorites } from '@/tanstackQuery/books';
 
 // ...
 
@@ -405,20 +388,18 @@ Each util should:
 export const getHasPermissions = () => {...}
 ```
 
->NOTE: There is also the another type of utils - sort of primitive which are 100% sure they return predictable result and no need in tests, so these utils should be located at `.../utils/common.ts`
-
 ### Constants
 
 Constants are optional for the root of the project and components among all the project.
 
 There are 2 types of constants to use:
 - Regular constants (`constants.ts`)
-- Schemas constants (`schemas.ts`)
+- Schemas constants (`schemas/` folder)
 
 The rules described below are applied for both of them.
 The only difference is:
 - `constants.ts` - for regular constants like time tokens, regexps etc.
-- `schemas.ts` - for `zod` schemas will be used in other schemas in all the project
+- `schemas/` folder - for `zod` schemas will be used in other schemas in all the project
 
 No matter, where the constants will appear, they should:
 - Have separate `constants.ts` file inside the folder where the constants will be created
@@ -428,10 +409,20 @@ No matter, where the constants will appear, they should:
 
 #### Schemas
 
-One more thing should be applied to schemas:
-- Each schema should have camel case name with ending `<schemaName>Schema`.
+Schemas should:
+- Have separate `schemas` folder inside the folder where the schemas will be used
+  - Global schemas will be used in all the project, should be located at `src/schemas/` folder
+  - If schemas will be used inside single component exclusively, you should create `schemas/` folder inside the component folder. Example: `src/components/ArticleCard/schemas/`.
+- Each schema should have camel case name with ending `<schemaName>Schema.ts`.
+- Each schema should have its inferred type
+
+Few more thing should be applied to schemas:
 ```ts
-export const signUpSchema = ...
+import { z } from 'zod';
+// ...
+
+export const signUpSchema = z.object({...});
+export type SignUpSchema = z.infer<typeof signUpSchema>;
 ```
 
 ### Types
@@ -476,17 +467,10 @@ The component should:
 - Have default export of the component itself
 
 The component folder should contain:
-- `<ComponentName>.tsx` - the component JSX
-- `<ComponentName>.module.css` - the styles of component file (optional)
-- `index.ts` the entry point file for exporting required modules from component
+- `index.tsx` - the component JSX, entry points of component
+- `styles.module.css` - the styles of component file (optional)
 
-```ts
-export * from './<ComponentName>';
-export { default } from './<ComponentName>';
-// ... if needed, may export types and/or constants
-```
-
-> NOTE: If component ha to haves hooks/utils/constants/contexts, take a look at relevant chapters above.
+> NOTE: If component has to haves hooks/utils/constants/contexts, take a look at relevant chapters above.
 
 ### Modules
 
@@ -503,16 +487,16 @@ Every module should:
 - have no props
 - module name should match the module component name:
   ```ts
-  // src/modules/About/About.tsx
+  // src/modules/About/index.tsx
 
   export const About: React.FC = () => {...}
   ```
 
 Modules are allowed:
 - to use `src/components` and/or `src/ui` components inside
-- to have owb hooks
+- to have own hooks
 - to have own constants/schemas/styles
-- to have own sub-components (`src/modules/About/components/...`)
+- to have own sub-modules and/or sub-components (`src/modules/About/components/...`)
 - to use its sub-modules inside if it is not a sub-route
 
 #### Submodules
@@ -545,14 +529,13 @@ Root file may include:
 All files and folders inside `src/routes` folder are represented as client routes by the file name:
 ```
 src/routes/index.tsx -> http://localhost:3000/
-src/routes/about.tsx -> http://localhost:3000/about/
-src/routes/about/settings.tsx -> http://localhost:3000/about/settings
+src/routes/about.tsx -> http://localhost:3000/about
 ```
 
 Folders cam include the subroutes and index route:
 ```
-src/routes/about/index.tsx -> http://localhost:3000/about/
-src/routes/about/settings.tsx -> http://localhost:3000/about/settings
+src/routes/about/index.tsx -> http://localhost:3000/about
+src/routes/about/settings/index.tsx -> http://localhost:3000/about/settings
 ```
 
 Routes can be lazy-loaded or not.
@@ -574,12 +557,13 @@ Regular route can:
 Route have different file naming convection inside `src/routes` folder:
 
 Routes should:
-- be named with kebab-case lowercase (`src/routes/<route-name>.tsx`)
-- If lazy - add `.lazy` before `.tsx` (`src/routes/<route-name>.lazy.tsx`)
+- be named with kebab-case lowercase (`src/routes/<route-name>/`)
+- have index file with `.tsx` extension (`src/routes/<route-name>/index.tsx`)
+- If lazy - add `.lazy` before `.tsx` (`src/routes/<route-name>/index.lazy.tsx`)
 - have no props
 - have route module name matched to route name but pascal-case ending with `<ModuleName>Page`:
   ```ts
-  // src/routes/about.tsx
+  // src/routes/about/index.tsx
 
   import About from '@/modules/about';
 
@@ -621,7 +605,7 @@ const AboutPage = createLazyFileRoute('/about')({
 })
 
 // index.tsx
-import { noopReturnNull } from '@/utils/common';
+import { noopReturnNull } from '@/utils/noopReturnNull';
 
 const AboutPage = createFileRoute('/about')({
     component: noopReturnNull,
@@ -636,7 +620,7 @@ const AboutPage = createFileRoute('/about')({
 Tanstack router allows to create layouts.
 
 Layouts should:
-- be named for layout semanticsm kebab-cae, starting with `_` and ending with `-layout`:
+- be named for layout semantics, kebab-case, starting with `_` and ending with `-layout`:
   - Example: `src/routes/_protected-layout/`
 - have both folder and file (not lazy) named by this layout:
   ```
@@ -655,7 +639,7 @@ Layout components should:
 - have no props
 
 ```ts
-// src/components/layouts/ProtectedLayout/ProtectedLayout.tsx
+// src/components/layouts/ProtectedLayout/index.tsx
 import { Outlet } from '@tanstack/react-router';
 
 const ProtectedLayout: React.FC = () => {
@@ -682,6 +666,9 @@ const ProtectedLayoutPage = createFileRoute('/_protected-layout')({
 Routes have own hooks like `useSearch` and `useNavigate` or other that `getRouteApi` return ([docs](https://tanstack.com/router/v1/docs/framework/react/api/router/getRouteApiFunction)). For optimizing the router tree iterations and by following the maintainer recommendations we should have the `from` attribute predefined for each route we have the hooks calls at.
 
 it is recommended to create custom route hooks for each module as follows:
+- be located in module hooks folder
+- have name based on module name: `src/modules/<ModuleName>/` -> `src/modules/<ModuleName>/hooks/use<ModuleName>RouteApi.ts`:
+  - Example: `src/modules/About/` -> `src/modules/About/hooks/useAboutRouteApi.ts`
 
 ```ts
 // src/modules/About/hooks/ueAboutRouteApi.ts
@@ -697,7 +684,7 @@ export const ueAboutRouteApi = () => {
     return { search, navigate };
 }
 
-// src/modules/About/About.tsx
+// src/modules/About/index.tsx
 
 const About: React.FC = () => {
     const { search, navigate } = ueAboutRouteApi();
@@ -709,9 +696,6 @@ const About: React.FC = () => {
 If no search needed, you may just return the navigate. Route API logic allows us to get the route data directly by setting the entry point as route id, which is autocompleted in dev mode launched.
 
 This methodology can be applied to layouts a well.
-
-<details>
-<summary> ✳️ Icons Usage</summary>
 
 ## ✳️ Icons Usage
 
@@ -753,4 +737,3 @@ Key moments:
 
 - 👉 Import Component names export, then name it as applicable icon naming is.
 - 👉 Autocomplete will support path to the svg file, ⚠️BUT⚠️ you should add ?svgUse param at the end of import statement for @svg-use to work
-</details
