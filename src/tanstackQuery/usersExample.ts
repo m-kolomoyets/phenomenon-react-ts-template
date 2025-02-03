@@ -4,7 +4,7 @@ import type { AxiosError } from 'axios';
 import { createUser, getUsers } from '@/api/usersExample';
 
 export const usersQueryKeys = {
-    all: 'users' as const,
+    all: ['users'] as const,
     allLists() {
         return [...usersQueryKeys.all, 'list'] as const;
     },
