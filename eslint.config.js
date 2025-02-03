@@ -1,4 +1,5 @@
 import eslint from '@eslint/js';
+import pluginTanstackQuery from '@tanstack/eslint-plugin-query';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import react from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
@@ -8,8 +9,13 @@ import tseslint from 'typescript-eslint';
 export default tseslint.config({
     ignores: ['**/dist/**', '**/tmp/**', '/src/routeTree.gen.ts'],
     files: ['**/*.{js,ts,tsx,cjs,mjs}'],
-    extends: [eslint.configs.recommended, tseslint.configs.recommended, eslintPluginPrettierRecommended],
-    plugins: { react, 'react-hooks': reactHooksPlugin },
+    extends: [
+        eslint.configs.recommended,
+        tseslint.configs.recommended,
+        eslintPluginPrettierRecommended,
+        pluginTanstackQuery.configs['flat/recommended'],
+    ],
+    plugins: { react, 'react-hooks': reactHooksPlugin, '@tanstack/query': pluginTanstackQuery },
     languageOptions: {
         parserOptions: {
             project: ['./tsconfig.app.json', './tsconfig.node.json', './tsconfig.json'],

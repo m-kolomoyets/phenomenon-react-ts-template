@@ -1,11 +1,10 @@
-import { memo } from 'react';
 import clsx from 'clsx';
-import { CURRENT_YEAR } from './constants';
+import type { HomeExampleProps } from './types';
 import Counter from './components/Counter';
 import { Component as PhenomenonMarkIcon } from '@/icons/phenomenon-mark.svg?svgUse';
-import s from './Home.module.css';
+import s from './style.module.css';
 
-const Home: React.FC = () => {
+const Home: React.FC<HomeExampleProps> = () => {
     return (
         <main className={clsx(s.wrap, 'full-height')}>
             <div className={s.inner}>
@@ -24,9 +23,9 @@ const Home: React.FC = () => {
                     </p>
                 </section>
             </div>
-            <footer className={s.footer}>&copy;&nbsp;{CURRENT_YEAR}, Phenomenon.studio</footer>
+            <footer className={s.footer}>&copy;&nbsp;{new Date().getFullYear()}, Phenomenon.studio</footer>
         </main>
     );
 };
 
-export default memo(Home);
+export default Home;

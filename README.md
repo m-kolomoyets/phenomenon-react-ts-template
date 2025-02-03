@@ -9,11 +9,11 @@ This project was bootstrapped with [Vite.js](https://vitejs.dev).
 -   [Typescript](https://www.typescriptlang.org) - Static type checker
 -   [Vite](https://vitejs.dev/) - Bundler
 -   [Tanstack Router](https://tanstack.com/router/latest/docs/framework/react/overview) - Routing (file-based)
--   [@svg-use](https://github.com/fpapado/svg-use) - icon management tool
+-   [Tanstack Query](https://tanstack.com/query/latest/docs/framework/react/overview) - Asynchronous state management
+-   [@svg-use](https://github.com/fpapado/svg-use) - Icon management tool
 -   [Eslint](https://eslint.org/) - Code linter
 -   [Prettier](https://prettier.io/) - Code formatter
--   [Husky](https://typicode.github.io/husky/) - commands execution handler on git events
--   [CLSX](https://github.com/lukeed/clsx) - classNames management tool
+-   [Husky](https://typicode.github.io/husky/) - Commands execution handler on git events
 
 </details>
 
@@ -227,7 +227,7 @@ Services should:
 - Have separate root `src/services` folder
 - Each service scope should have its own folder
 - Each service scope should have its own file
-  
+
 ##### API Services
 
 API services are services that contain API requests functions to be used in API hooks.

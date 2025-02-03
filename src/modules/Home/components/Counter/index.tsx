@@ -1,17 +1,17 @@
-import { memo, useCallback, useState } from 'react';
+import React from 'react';
 import clsx from 'clsx';
-import s from './Counter.module.css';
+import s from './style.module.css';
 
 const Counter: React.FC = () => {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = React.useState(0);
 
-    const increment = useCallback(() => {
+    const increment = React.useCallback(() => {
         setCount((prev) => {
             return prev + 1;
         });
     }, []);
 
-    const decrement = useCallback(() => {
+    const decrement = React.useCallback(() => {
         setCount((prev) => {
             return prev - 1;
         });
@@ -34,4 +34,4 @@ const Counter: React.FC = () => {
     );
 };
 
-export default memo(Counter);
+export default React.memo(Counter);
